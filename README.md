@@ -18,6 +18,13 @@
   - added Dockerfile in /Server
   - this will be the future hit point of any backend API calls called on by Client
 
+## Ports
+
+In dev mode these ports are used:
+
+Client : 3000
+Server : 3002
+
 ## Making Changes to Client
 
 ### 1. Inner dev loop
@@ -33,7 +40,7 @@
 - `npm run build` to build the files-to-be served, they will be built into `dist`
 
 2.2: Create docker image
-This will copy over the built changes in step 3 to a new docker image
+This will copy over the built changes (from `/dist`) in step 2.1 to a new docker image
 - `docker build --no-cache -t gamesapp .`
 
 2.3: Delete and Run docker image

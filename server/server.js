@@ -1,13 +1,11 @@
 const express = require('express');
 const app = express();
-const port = process.env.port || 3000;
+const port = process.env.port || 3002;
 
-// dist contains our webpack-bundled html and js files
-// set the node environment to production
-if (process.env.NODE_ENV === "production")
-{
-    app.use(express.static('dist'));
-}
+app.get('/', (req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Hello, you\'ve hit the base route for server');
+});
 
 app.listen(port, e => {
     if (e) throw e;
