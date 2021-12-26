@@ -14,10 +14,11 @@ app.get('/', (_, res) => {
 
 // For any paths that we can't serve, just serve the root path of client
 app.get('*', (_, res) => {
+    res.writeHead(302);
     res.redirect('/');
 })
 
-app.use((err, _, _, _) => {
+app.use((err, req, res, next) => {
     if (err) {
         console.log("Errored out with: " + err);
     }
