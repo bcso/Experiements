@@ -1,0 +1,15 @@
+{
+  "name": "gameserver",
+  "version": "1.0.0",
+  "description": "this contains the backend logic for game website",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "author": "Brian So",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}

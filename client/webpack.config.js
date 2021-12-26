@@ -1,11 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const port = process.env.port || 3000;
+const PORT = process.env.port || 3000;
+const HOST = process.env.host || 'localhost';
 
 module.exports = {
     mode: 'development',
-    entry: './src/index.js',
+    entry: './src/index.jsx',
     devtool: 'inline-source-map',
     output: {
         filename: 'main.[hash].js'
@@ -13,7 +14,7 @@ module.exports = {
     module : {
         rules: [
             {
-                test: /\.(js)$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: ['babel-loader']
             },
@@ -41,8 +42,8 @@ module.exports = {
         })
     ],
     devServer: {
-        host: 'localhost',
-        port: port,
+        host: HOST,
+        port: PORT,
         historyApiFallback: true,
         open: true
     }
