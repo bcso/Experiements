@@ -45,10 +45,12 @@ This will copy over the built changes in step 3 to a new docker image
 3.1: See changes
 - open `localhost:3001` in a new browse rwindow
 
-
 # Todo
 
 ## Client
 - Consider using [2 webpack configs](https://webpack.js.org/guides/production/) : one or prod and one for dev
 - Create bash script to build, push docker changes
 - Determine if we need to actually build a new docker image to redeploy
+
+## Hosting
+- How to host the express app? [AWS?](https://aws.plainenglish.io/deploying-a-nodejs-application-in-aws-ec2-c1618b9b3874) Firebase?

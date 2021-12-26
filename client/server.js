@@ -16,13 +16,13 @@ app.get('/', (_, res) => {
 app.get('*', (_, res) => {
     res.writeHead(302);
     res.redirect('/');
-})
+});
 
 app.use((err, req, res, next) => {
     if (err) {
         console.log("Errored out with: " + err);
     }
-})
+});
 
 app.listen(port, e => {
     if (e) throw e;
