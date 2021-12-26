@@ -1,10 +1,11 @@
 const React = require('react');
 import { Outlet, Link } from 'react-router-dom';
+import styles from '../styles.css';
 
 function App(){
     return(
     <div>
-        <h1> I'm a Game app! Click below to navigate to your game. </h1>
+        <div className={styles.introTitle}> I'm a Game app! Click below to navigate to your game. </div>
 
         <Link to="/ttc"> TicTacToe </Link>
         <Link to="/about"> About </Link>
