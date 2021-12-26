@@ -37,7 +37,7 @@ This will copy over the built changes in step 3 to a new docker image
 - `docker build --no-cache -t gamesapp .`
 
 2.3: Delete and Run docker image
-- Remove the oldest image`docker container ls | grep 3000 | cut -c1-6 | {read imgname; docker container rm -f $imgname;} && docker container ls`
+- Remove any container running on 3001 `docker container ls | grep 3001 | cut -c1-6 | {read imgname; docker container rm -f $imgname;} && docker container ls`
 
 - `docker run -dp 3001:3000 gamesapp`
 
