@@ -1,13 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import PageBaseLayout from '../common/PageBaseLayout';
 
 function About() {
     return (
-      <main style={{ padding: "1rem 0" }}>
-        <h2>This is the about page</h2>
-        <Link to="/"> <Button> Home </Button> </Link>
-      </main>
+      <PageBaseLayout pageTitle="About">
+        <div>I'm the About bits!</div>
+      </PageBaseLayout>
     );
 }
 

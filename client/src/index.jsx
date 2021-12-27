@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import TicTacToe from './components/Games/tictactoe';
+import TicTacToe from './components/Games/TicTacToe/tictactoe';
 import About from './components/About/about';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

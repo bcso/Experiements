@@ -1,6 +1,6 @@
 const React = require('react');
 import { Outlet, Link } from 'react-router-dom';
-import styles from '../styles.css';
+import styles from './common/mainpagestyles.css';
 import {
     Container,
     Row,
