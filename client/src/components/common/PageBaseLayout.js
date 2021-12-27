@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Button, Navbar, Nav, NavDropdown, Container} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
-import styles from './PageBaseLayoutStyles.css';
+import styles from './PageBaseLayout.css';
 
 function PageBaseLayout({children}) {
     return(

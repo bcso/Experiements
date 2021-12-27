@@ -1,6 +1,6 @@
 const React = require('react');
 import { Outlet, Link } from 'react-router-dom';
-import styles from './appstyles.css';
+import styles from './App.css';
 
 import {
     Container,
