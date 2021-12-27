@@ -30,7 +30,9 @@ function PageBaseLayout({children}) {
             </Container>
             </Navbar>
 
-            <div className={styles.contentRootContainer}>{children}</div>
+            <div className={styles.contentRootContainer}>
+                {children}
+            </div>
         </>
     )
 }
