@@ -73,4 +73,7 @@ This will copy over the built changes (from `/dist`) in step 2.1 to a new docker
 - Determine if we need to actually build a new docker image to redeploy
 
 ## Hosting
-- How to host the express app? [AWS?](https://aws.plainenglish.io/deploying-a-nodejs-application-in-aws-ec2-c1618b9b3874) Firebase?
+- How to host the express app?
+  - [AWS?](https://aws.plainenglish.io/deploying-a-nodejs-application-in-aws-ec2-c1618b9b3874)
+  - Firebase?
+  - [Heroku?](https://devcenter.heroku.com/articles/container-registry-and-runtime)
