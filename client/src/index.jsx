@@ -4,6 +4,7 @@ import App from './components/App';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import TickTacToe from './components/Games/tictactoe';
 import About from './components/Games/about';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
     <BrowserRouter>
