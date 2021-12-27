@@ -18,6 +18,10 @@
   - added Dockerfile in /Server
   - this will be the future hit point of any backend API calls called on by Client
 
+12/26/2021
+- Hosted client to https://gamesapp-26c11.web.app/
+  - Deployed `/dist`
+
 ## Ports
 
 In dev mode these ports are used:
@@ -34,23 +38,32 @@ Server : 3002
 1.2: Test dev changes
 - Run `npm run startDev` to start the webpack dev server and see your changes
 
-### 2. Build and Push to prod
+### 2. Build Changes
 2.1: Build dev changes
 - You are done testing and want to begin to push to prod now
 - `npm run build` to build the files-to-be served, they will be built into `dist`
 
-2.2: Create docker image
+### 3. Deploy changes...
+
+#### To Docker Image
+
+1. Create docker image
 This will copy over the built changes (from `/dist`) in step 2.1 to a new docker image
 - `docker build --no-cache -t gamesapp .`
 
-2.3: Delete and Run docker image
+2. Delete and Run docker image
 - Remove any container running on 3001 `docker container ls | grep 3001 | cut -c1-6 | {read imgname; docker container rm -f $imgname;} && docker container ls`
 
 - `docker run -dp 3001:3000 gamesapp`
 
-### 3. See your changes
-3.1: See changes
+3. See changes
 - open `localhost:3001` in a new browse rwindow
+
+#### To Firebase
+
+1. `firebase deploy`
+
+2. visit https://gamesapp-26c11.web.app/ 
 
 # Todo
 
