@@ -1,32 +1,39 @@
 const React = require('react');
 import { Outlet, Link } from 'react-router-dom';
 import styles from '../styles.css';
+import {
+    Container,
+    Row,
+    Col,
+    Button
+} from 'react-bootstrap';
 
 function App(){
     return(
-    <div>
-        <div className={styles.introTitle}> I'm a Game app! Click below to navigate to your game. </div>
-
-        <Link to="/ttc"> TicTacToe </Link>
-        <Link to="/about"> About </Link>
-        <Link to="/about"> About </Link>
-        <nav
-            style={{
-            borderBottom: "solid 1px",
-            paddingBottom: "1rem"
-            }}
-        />
-
-        <Outlet />
-
-        <nav
-            style={{
-            borderBottom: "solid 1px",
-            paddingBottom: "1rem"
-            }}
-        />
-        <Link to="/"> Home </Link>
-    </div>
+        <Container className={styles.introPageContainer} fluid>
+            <Row className={styles.introPageTitle}>
+                <Col>
+                    <h1>Game App</h1>
+                </Col>
+            </Row>
+            <Row className={styles.introPageButtonNav}>
+                <Col xs="auto">
+                    <Link to="/ttc">
+                        <Button> TicTacToe </Button>
+                    </Link>
+                </Col>
+                <Col xs="auto">
+                    <Link to="/about">
+                        <Button> Chat Room </Button>
+                    </Link>
+                </Col>
+                <Col xs="auto">
+                    <Link to="/about">
+                        <Button> About </Button>
+                    </Link>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 
