@@ -12,9 +12,7 @@ function App(){
     return(
         <Container className={styles.introPageContainer} fluid>
             <Row className={styles.introPageTitle}>
-                <Col>
-                    <h1>Game App</h1>
-                </Col>
+                <Col> <h1>Game App</h1> </Col>
             </Row>
             <Row className={styles.introPageButtonNav}>
                 <Col xs="auto">
