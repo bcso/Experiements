@@ -2,8 +2,11 @@ import React, {useEffect, useState} from 'react';
 import PageBaseLayout from '../../common/PageBaseLayout';
 import GameBoard from './GameBoard';
 import MoveHistory from './MoveHistory';
+import {Container, Row, Col, Button} from 'react-bootstrap';
+import styles from './TicTacToe.css';
 
-const defaultGameState = {
+function generateDefaultGameState() {
+    return {
     players : {
         P1: "X",
         P2: "O"
@@ -21,14 +24,24 @@ const defaultGameState = {
     },
     sessionID: "gameName0"
   }
+}
 
 // [["P1",0,0], ["P2", 0, 1]]
-const defaultMoves = [];
+function generateDefaultMoves() {
+    return [];
+}
 
 function TicTacToe() {
 
-    const [gameState, setGameState] = useState(defaultGameState);
-    const [moves, setMoves] = useState(defaultMoves);
+    // Make sure we use new references as initial states;
+    const [gameState, setGameState] = useState(generateDefaultGameState());
+    const [moves, setMoves] = useState(generateDefaultMoves());
+
+    function resetState()
+    {
+        setMoves(generateDefaultMoves());
+        setGameState(generateDefaultGameState());
+    }
 
     function handleMoveInput(player, moveRow, moveCol) {
         // Update our board with the new move
@@ -61,6 +74,7 @@ function TicTacToe() {
     useEffect(() => {
         const prevPlayer = gameState.boardState.previousPlayer;
         // Ensure at least 1 player has gone
+        console.log("effect used");
         if (prevPlayer !== "")
         {
             const newMoves = [... moves];
@@ -75,9 +89,21 @@ function TicTacToe() {
 
     return(
         <PageBaseLayout pageTitle="TicTacToe">
-            <div>I'm the toe bits!</div>
-            <GameBoard gameState={gameState} onMoveInput={handleMoveInput}></GameBoard>
-            <MoveHistory gameState={gameState} moves={moves}></MoveHistory>
+            <Container className={styles.ttcRootContainer}>
+                <Row>
+                    <Col>
+                        <GameBoard gameState={gameState} onMoveInput={handleMoveInput}></GameBoard>
+                    </Col>
+                    <Col className={styles.moveHistoryCenter}>
+                        <MoveHistory gameState={gameState} moves={moves}></MoveHistory>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={{ span: 2, offset: 6 }}>
+                        <Button type="button" onClick={() => resetState()}>Restart</Button>
+                    </Col>
+                </Row>
+            </Container>
         </PageBaseLayout>
     )
 }
