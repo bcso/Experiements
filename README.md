@@ -22,6 +22,12 @@
 - Hosted client to https://gamesapp-26c11.web.app/
   - Deployed `/dist`
 
+12/27/2021
+- Built main interactivity functionality for tic tac toe
+  - State persistence
+  - Move history show
+  - Reset mode
+
 ## Ports
 
 In dev mode these ports are used:

@@ -9,7 +9,7 @@ function PageBaseLayout({children}) {
         <>
             <Navbar bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand>Games</Navbar.Brand>
+                <Navbar.Brand>Experiements</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
