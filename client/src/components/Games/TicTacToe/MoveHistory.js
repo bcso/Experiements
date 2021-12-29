@@ -4,15 +4,13 @@ import {Container, Row} from 'react-bootstrap';
 function MoveHistory({gameState, moves}){
     return(
         <>
-
-        <div>
-          Current Player : {`${gameState.boardState.currentPlayer} (${gameState.players[gameState.boardState.currentPlayer]})`}
-        </div>
-
         <Container>
-            <Row>~Moves~</Row>
+            <Row><p>Current Player : {`${gameState.boardState.currentPlayer} (${gameState.players[gameState.boardState.currentPlayer]})`}</p></Row>
+            <Row><p>Moves:</p></Row>
             {moves.map(m => {
-                return (<Row key={m}>{`${m[0]}: row: ${m[1]} col: ${m[2]}`}</Row>);
+                return (<Row key={m}>
+                    <h6 className='lead'> {`${m[0]}: row: ${m[1]} col: ${m[2]}`} </h6>
+                </Row>);
             })}
         </Container>
         </>

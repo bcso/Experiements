@@ -4,38 +4,19 @@ import GameBoard from './GameBoard';
 import MoveHistory from './MoveHistory';
 import {Container, Row, Col, Button} from 'react-bootstrap';
 import styles from './TicTacToe.css';
-
-function generateDefaultGameState() {
-    return {
-    players : {
-        P1: "X",
-        P2: "O"
-    },
-    boardState: {
-      currentPlayer: "P1",
-      previousPlayer: "",
-      currentMove: [],
-      board: [
-          ["*","*","*"],
-          ["*","*","*"],
-          ["*","*","*"]
-        ],
-      winner: ""
-    },
-    sessionID: "gameName0"
-  }
-}
-
-// [["P1",0,0], ["P2", 0, 1]]
-function generateDefaultMoves() {
-    return [];
-}
+import {generateDefaultGameState, 
+        generateDefaultMoves} from './ttcHelpers.js';
 
 function TicTacToe() {
 
     // Make sure we use new references as initial states;
     const [gameState, setGameState] = useState(generateDefaultGameState());
     const [moves, setMoves] = useState(generateDefaultMoves());
+
+    function determineWinner()
+    {
+
+    }
 
     function resetState()
     {
@@ -73,8 +54,8 @@ function TicTacToe() {
 
     useEffect(() => {
         const prevPlayer = gameState.boardState.previousPlayer;
+
         // Ensure at least 1 player has gone
-        console.log("effect used");
         if (prevPlayer !== "")
         {
             const newMoves = [... moves];
@@ -85,6 +66,18 @@ function TicTacToe() {
             ]);
             setMoves(newMoves);
         }
+    }, [gameState]);
+
+    // on game state update, check if there is a winner
+    useEffect(() => {
+        // const currGameState = {... gameState};
+        // const board = currGameState.boardState.board;
+
+        // // calcualte our winner
+        // const recentMove = [... moves[0]];
+        // const recentPlayer = gameState.players[recentMove[0]];
+
+        // console.log(recentPlayer);
     }, [gameState]);
 
     return(
