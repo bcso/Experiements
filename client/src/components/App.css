@@ -1,15 +1,18 @@
 /* Pallete: https://coolors.co/db5461-ffd9ce-593c8f-8ef9f3-171738 */
 
 .introPageRoot {
-    width: 100vw;
-    height: 100vh;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    display: block;
+    top: inherit;
     background-color: #FFD9CE;
 }
 
 .introPageContainer {
     text-align: center;
     position: absolute;
-    top: 40%;
+    top: 35%;
 }
 
 .introPageTitle {
