@@ -5,18 +5,14 @@ import MoveHistory from './MoveHistory';
 import {Container, Row, Col, Button} from 'react-bootstrap';
 import styles from './TicTacToe.css';
 import {generateDefaultGameState, 
-        generateDefaultMoves} from './ttcHelpers.js';
+        generateDefaultMoves,
+        determineWinnerCoords} from './ttcHelpers.js';
 
 function TicTacToe() {
 
     // Make sure we use new references as initial states;
     const [gameState, setGameState] = useState(generateDefaultGameState());
     const [moves, setMoves] = useState(generateDefaultMoves());
-
-    function determineWinner()
-    {
-
-    }
 
     function resetState()
     {
@@ -62,7 +58,8 @@ function TicTacToe() {
             newMoves.unshift([
                 prevPlayer,
                 gameState.boardState.currentMove[0],
-                gameState.boardState.currentMove[1]
+                gameState.boardState.currentMove[1],
+                crypto.randomUUID()
             ]);
             setMoves(newMoves);
         }
@@ -70,15 +67,26 @@ function TicTacToe() {
 
     // on game state update, check if there is a winner
     useEffect(() => {
-        // const currGameState = {... gameState};
-        // const board = currGameState.boardState.board;
+        const newGameState = {... gameState};
+        const board = newGameState.boardState.board;
 
+        const winData = determineWinnerCoords(gameState, board);
+
+        if (winData.length > 0)
+        {
+            // we have a winner!
+            const [winCharReplacement, winner, ...coords] = winData;
+            newGameState.boardState.winner = winner;
+            coords.forEach(coord => {
+                newGameState.boardState.board[coord[0]][coord[1]] = `${winCharReplacement} ${winner}` ;
+            });
+            console.log(newGameState.boardState.board);
+            setGameState(newGameState);
+        }
         // // calcualte our winner
         // const recentMove = [... moves[0]];
         // const recentPlayer = gameState.players[recentMove[0]];
-
-        // console.log(recentPlayer);
-    }, [gameState]);
+    }, [gameState.boardState.board]);
 
     return(
         <PageBaseLayout pageTitle="TicTacToe">
