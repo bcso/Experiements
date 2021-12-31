@@ -8,6 +8,8 @@ import {generateDefaultGameState,
         generateDefaultMoves,
         determineWinnerCoords} from './ttcHelpers.js';
 
+import { Move } from './Move';
+
 function TicTacToe() {
 
     // Make sure we use new references as initial states;
@@ -55,12 +57,11 @@ function TicTacToe() {
         if (prevPlayer !== "")
         {
             const newMoves = [... moves];
-            newMoves.unshift([
-                prevPlayer,
+            const newMove = new Move(
+                prevPlayer, 
                 gameState.boardState.currentMove[0],
-                gameState.boardState.currentMove[1],
-                crypto.randomUUID()
-            ]);
+                gameState.boardState.currentMove[1]);
+            newMoves.unshift(newMove);
             setMoves(newMoves);
         }
     }, [gameState]);
@@ -68,9 +69,11 @@ function TicTacToe() {
     // on game state update, check if there is a winner
     useEffect(() => {
         const newGameState = {... gameState};
-        const board = newGameState.boardState.board;
-
-        const winData = determineWinnerCoords(gameState, board);
+        
+        const winData = determineWinnerCoords(
+            gameState, 
+            newGameState.boardState.board
+        );
 
         if (winData.length > 0)
         {
@@ -80,12 +83,8 @@ function TicTacToe() {
             coords.forEach(coord => {
                 newGameState.boardState.board[coord[0]][coord[1]] = `${winCharReplacement} ${winner}` ;
             });
-            console.log(newGameState.boardState.board);
             setGameState(newGameState);
         }
-        // // calcualte our winner
-        // const recentMove = [... moves[0]];
-        // const recentPlayer = gameState.players[recentMove[0]];
     }, [gameState.boardState.board]);
 
     return(

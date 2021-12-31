@@ -5,6 +5,8 @@ const _winningCharReplacements = {
   d2WinnerChar: '/'
 }
 
+// Default schema for gameState state
+// Serves as model as well
 function generateDefaultGameState() {
     return {
     players : {
