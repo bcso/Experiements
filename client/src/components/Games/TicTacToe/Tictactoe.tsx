@@ -3,11 +3,10 @@ import PageBaseLayout from '../../common/PageBaseLayout';
 import GameBoard from './GameBoard';
 import MoveHistory from './MoveHistory';
 import {Container, Row, Col, Button} from 'react-bootstrap';
-import styles from './TicTacToe.css';
+import styles from './TicTacToe.module.css';
 import {generateDefaultGameState, 
         generateDefaultMoves,
-        determineWinnerCoords} from './ttcHelpers.js';
-
+        determineWinnerData} from './helpers';
 import { Move } from './Move';
 
 function TicTacToe() {
@@ -22,7 +21,7 @@ function TicTacToe() {
         setGameState(generateDefaultGameState());
     }
 
-    function handleMoveInput(player, moveRow, moveCol) {
+    function handleMoveInput(player: string, moveRow: number, moveCol: number) {
         // Update our board with the new move
 
         // Input validation, make sure the cell is unused
@@ -70,17 +69,20 @@ function TicTacToe() {
     useEffect(() => {
         const newGameState = {... gameState};
         
-        const winData = determineWinnerCoords(
+        const winData = determineWinnerData(
             gameState, 
             newGameState.boardState.board
         );
 
-        if (winData.length > 0)
+        if (Object.keys(winData).length > 0)
         {
             // we have a winner!
-            const [winCharReplacement, winner, ...coords] = winData;
+            const winCharReplacement = winData.winChar;
+            const winner = winData.player;
+            const coords = winData.moveArray;
+
             newGameState.boardState.winner = winner;
-            coords.forEach(coord => {
+            coords.forEach( (coord : number[]) => {
                 newGameState.boardState.board[coord[0]][coord[1]] = `${winCharReplacement} ${winner}` ;
             });
             setGameState(newGameState);
@@ -88,7 +90,7 @@ function TicTacToe() {
     }, [gameState.boardState.board]);
 
     return(
-        <PageBaseLayout pageTitle="TicTacToe">
+        <PageBaseLayout>
             <Container className={styles.ttcRootContainer}>
                 <Row>
                     <Col>

@@ -1,9 +1,10 @@
 import React from 'react';
 import {Container, Row, Col, Button} from 'react-bootstrap';
+import { IGameBoardProps } from './types';
 
-function GameBoard({gameState, onMoveInput}) {
+function GameBoard({gameState, onMoveInput} : IGameBoardProps) {
 
-    function handleInput(player, moveRow, moveCol) {
+    function handleInput(player: string, moveRow: number, moveCol: number) {
         onMoveInput(player, moveRow, moveCol);
     }
 
