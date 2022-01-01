@@ -8,10 +8,10 @@ const _winningCharReplacements = {
   d2WinnerChar: '/'
 }
 
-// const players : IPlayers = {
-//   P1: "X",
-//   P2: "O"
-// }
+const playerNames : IPlayers = {
+  P1: "P1",
+  P2: "P2"
+}
 
 // Default schema for gameState state
 // Serves as model as well
@@ -107,4 +107,4 @@ function determineWinnerData(gameState : IGameState, board : string[][]) : IWinn
     return {};
 }
 
-export {generateDefaultGameState, generateDefaultMoves, determineWinnerData};
+export {generateDefaultGameState, generateDefaultMoves, determineWinnerData, playerNames};
