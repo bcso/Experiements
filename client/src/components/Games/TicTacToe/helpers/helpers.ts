@@ -1,5 +1,5 @@
 import { Move } from "./Move";
-import { IGameState, IWinnerData } from "./types";
+import { IGameState, IPlayers, IWinnerData } from "./types";
 
 const _winningCharReplacements = {
   hWinnerChar : '-',
@@ -7,6 +7,11 @@ const _winningCharReplacements = {
   d1WinnerChar: '\\',
   d2WinnerChar: '/'
 }
+
+// const players : IPlayers = {
+//   P1: "X",
+//   P2: "O"
+// }
 
 // Default schema for gameState state
 // Serves as model as well

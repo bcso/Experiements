@@ -5,11 +5,13 @@ export interface IMove {
     uuid: string;
   }
 
+export type Board = string[][];
+
 export interface IBoardState {
     currentPlayer: string,
     previousPlayer: string,
     currentMove: number[],
-    board: string[][],
+    board: Board,
     winner: string
 }
 

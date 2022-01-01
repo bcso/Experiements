@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import PageBaseLayout from '../../common/PageBaseLayout';
+import PageBaseLayout from '../../../common/PageBaseLayout';
 import GameBoard from './GameBoard';
 import MoveHistory from './MoveHistory';
 import {Container, Row, Col, Button} from 'react-bootstrap';
-import styles from './TicTacToe.module.css';
+import styles from '../css/TicTacToe.module.css';
 import {generateDefaultGameState, 
         generateDefaultMoves,
-        determineWinnerData} from './helpers';
-import { Move } from './Move';
+        determineWinnerData} from '../helpers/helpers';
+import { Move } from '../helpers/Move';
+import { Board, IGameState, IPlayers } from '../helpers/types';
 
 function TicTacToe() {
 
@@ -27,14 +28,14 @@ function TicTacToe() {
         // Input validation, make sure the cell is unused
         if (gameState.boardState.board[moveRow][moveCol] !== '*') return;
 
-        const newBoard = [... gameState.boardState.board];
+        const newBoard : Board = [... gameState.boardState.board];
         newBoard[moveRow][moveCol] = gameState.players[player];
 
-        const newGameState = {... gameState};
+        const newGameState : IGameState = {... gameState};
         newGameState.boardState.board = newBoard;
 
         // Update the current player
-        const currentPlayer = gameState.boardState.currentPlayer;
+        const currentPlayer : string = gameState.boardState.currentPlayer;
 
         if (currentPlayer === "P1" || currentPlayer === "")
         {
