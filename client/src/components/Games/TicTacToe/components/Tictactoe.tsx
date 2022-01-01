@@ -6,9 +6,10 @@ import {Container, Row, Col, Button} from 'react-bootstrap';
 import styles from '../css/TicTacToe.module.css';
 import {generateDefaultGameState, 
         generateDefaultMoves,
-        determineWinnerData} from '../helpers/helpers';
+        determineWinnerData,
+        playerNames} from '../helpers/helpers';
 import { Move } from '../helpers/Move';
-import { Board, IGameState, IPlayers } from '../helpers/types';
+import { Board, IGameState, IWinnerData } from '../helpers/types';
 
 function TicTacToe() {
 
@@ -37,13 +38,13 @@ function TicTacToe() {
         // Update the current player
         const currentPlayer : string = gameState.boardState.currentPlayer;
 
-        if (currentPlayer === "P1" || currentPlayer === "")
+        if (currentPlayer === playerNames.P1 || !currentPlayer)
         {
-            newGameState.boardState.currentPlayer = "P2";
-            newGameState.boardState.previousPlayer = "P1";
+            newGameState.boardState.currentPlayer = playerNames.P2;
+            newGameState.boardState.previousPlayer = playerNames.P1;
         } else {
-            newGameState.boardState.currentPlayer = "P1";
-            newGameState.boardState.previousPlayer = "P2";
+            newGameState.boardState.currentPlayer = playerNames.P1;
+            newGameState.boardState.previousPlayer = playerNames.P2;
         }
 
         newGameState.boardState.currentMove = [moveRow, moveCol];
@@ -51,13 +52,13 @@ function TicTacToe() {
     }
 
     useEffect(() => {
-        const prevPlayer = gameState.boardState.previousPlayer;
+        const prevPlayer : string = gameState.boardState.previousPlayer;
 
         // Ensure at least 1 player has gone
         if (prevPlayer !== "")
         {
-            const newMoves = [... moves];
-            const newMove = new Move(
+            const newMoves : Move[] = [... moves];
+            const newMove : Move = new Move(
                 prevPlayer, 
                 gameState.boardState.currentMove[0],
                 gameState.boardState.currentMove[1]);
@@ -68,9 +69,9 @@ function TicTacToe() {
 
     // on game state update, check if there is a winner
     useEffect(() => {
-        const newGameState = {... gameState};
+        const newGameState : IGameState = {... gameState};
         
-        const winData = determineWinnerData(
+        const winData : IWinnerData = determineWinnerData(
             gameState, 
             newGameState.boardState.board
         );
@@ -78,9 +79,9 @@ function TicTacToe() {
         if (Object.keys(winData).length > 0)
         {
             // we have a winner!
-            const winCharReplacement = winData.winChar;
-            const winner = winData.player;
-            const coords = winData.moveArray;
+            const winCharReplacement : string = winData.winChar;
+            const winner : string = winData.player;
+            const coords : number[][] = winData.moveArray;
 
             newGameState.boardState.winner = winner;
             coords.forEach( (coord : number[]) => {
