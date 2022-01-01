@@ -1,5 +1,5 @@
 import { Move } from "./Move";
-import { IGameState, IPlayers, IWinnerData } from "./types";
+import { IGameState, IPlayers, IWinnerData, IPlayerMarkers } from "./types";
 
 const _winningCharReplacements = {
   hWinnerChar : '-',
@@ -9,8 +9,13 @@ const _winningCharReplacements = {
 }
 
 const playerNames : IPlayers = {
-  P1: "P1",
-  P2: "P2"
+  P1: "MYPLAYER1",
+  P2: "MYPLAYER2"
+}
+
+const playerMarkers : IPlayerMarkers = {
+  "MYPLAYER1": "X",
+  "MYPLAYER2": "O"
 }
 
 // Default schema for gameState state
@@ -21,8 +26,9 @@ function generateDefaultGameState() : IGameState {
           P1: "X",
           P2: "O"
       },
+      playerNames : playerNames,
       boardState: {
-        currentPlayer: "P1",
+        currentPlayer: playerNames.P1,
         previousPlayer: "",
         currentMove: [],
         board: [
@@ -107,4 +113,4 @@ function determineWinnerData(gameState : IGameState, board : string[][]) : IWinn
     return {};
 }
 
-export {generateDefaultGameState, generateDefaultMoves, determineWinnerData, playerNames};
+export {generateDefaultGameState, generateDefaultMoves, determineWinnerData, playerNames, playerMarkers};

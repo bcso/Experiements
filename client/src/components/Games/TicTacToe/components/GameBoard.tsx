@@ -5,11 +5,11 @@ import { IGameBoardProps } from '../helpers/types';
 function GameBoard({gameState, onMoveInput} : IGameBoardProps) {
 
     function handleInput(
-        player: string, 
+        currentPlayer: string, 
         moveRow: number, 
         moveCol: number) : void
     {
-        onMoveInput(player, moveRow, moveCol);
+        onMoveInput(currentPlayer, moveRow, moveCol);
     }
 
     return (

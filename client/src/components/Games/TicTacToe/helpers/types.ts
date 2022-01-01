@@ -21,8 +21,13 @@ export interface IPlayers {
     [key: string]: string
 }
 
+export interface IPlayerMarkers {
+    [key: string]: string
+}
+
 export interface IGameState {
     players: IPlayers,
+    playerNames: IPlayers,
     boardState: IBoardState,
     sessionID: string
 }
@@ -41,5 +46,5 @@ export interface IMoveHistoryProps {
 
 export interface IGameBoardProps {
     gameState: IGameState,
-    onMoveInput : (player: string, moveRow: number, moveCol: number) => void
+    onMoveInput : (currentPlayer: string, moveRow: number, moveCol: number) => void
 }

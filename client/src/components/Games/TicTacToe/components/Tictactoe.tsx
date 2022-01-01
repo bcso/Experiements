@@ -7,7 +7,8 @@ import styles from '../css/TicTacToe.module.css';
 import {generateDefaultGameState, 
         generateDefaultMoves,
         determineWinnerData,
-        playerNames} from '../helpers/helpers';
+        playerNames,
+        playerMarkers} from '../helpers/helpers';
 import { Move } from '../helpers/Move';
 import { Board, IGameState, IWinnerData } from '../helpers/types';
 
@@ -30,7 +31,7 @@ function TicTacToe() {
         if (gameState.boardState.board[moveRow][moveCol] !== '*') return;
 
         const newBoard : Board = [... gameState.boardState.board];
-        newBoard[moveRow][moveCol] = gameState.players[player];
+        newBoard[moveRow][moveCol] = playerMarkers[player];
 
         const newGameState : IGameState = {... gameState};
         newGameState.boardState.board = newBoard;
