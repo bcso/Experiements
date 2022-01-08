@@ -10,11 +10,11 @@ app.use(express.static('dist'));
 app.get('/', (_, res) => {
     res.writeHead(200);
     fs.createWriteStream('dist/index.html').pipe(res);
+    res.end();
 });
 
 // For any paths that we can't serve, just serve the root path of client
 app.get('*', (_, res) => {
-    res.writeHead(302);
     res.redirect('/');
 });
 
