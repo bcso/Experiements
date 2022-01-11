@@ -1,10 +1,13 @@
 import React from 'react';
 import PageBaseLayout from '../../common/PageBaseLayout';
+import PageInProgress from '../../common/PageInProgress';
 
 function ChatApp() {
     return(
         <PageBaseLayout pageTitle="ChatApp">
-            <div>I'm the chat bits!</div>
+            <PageInProgress 
+                pageTitle="ChatApp"
+                pageDescription="This is a work in progress page for a websocket based game!"/>
         </PageBaseLayout>
     )
 }

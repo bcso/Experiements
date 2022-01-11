@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container, Row, Col, Button} from 'react-bootstrap';
-import { IGameBoardProps } from '../helpers/types';
+import { IGameBoardProps } from '../types';
 
 function GameBoard({gameState, onMoveInput} : IGameBoardProps) {
 

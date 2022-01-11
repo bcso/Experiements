@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Row} from 'react-bootstrap';
 import { playerMarkers } from '../helpers/helpers';
-import { IMoveHistoryProps } from '../helpers/types';
+import { IMoveHistoryProps } from '../types';
 
 function MoveHistory({gameState, moves} : IMoveHistoryProps){
     return(

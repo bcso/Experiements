@@ -1,4 +1,4 @@
-import { IMove } from './types';
+import { IMove } from '../types';
 
 declare global {
   interface Crypto {

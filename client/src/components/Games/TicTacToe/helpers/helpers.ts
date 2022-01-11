@@ -1,5 +1,5 @@
 import { Move } from "./Move";
-import { IGameState, IPlayers, IWinnerData, IPlayerMarkers } from "./types";
+import { IGameState, IPlayers, IWinnerData, IPlayerMarkers } from "../types";
 
 const _winningCharReplacements = {
   hWinnerChar : '-',

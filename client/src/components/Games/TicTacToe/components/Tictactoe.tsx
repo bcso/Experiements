@@ -10,7 +10,7 @@ import {generateDefaultGameState,
         playerNames,
         playerMarkers} from '../helpers/helpers';
 import { Move } from '../helpers/Move';
-import { Board, IGameState, IWinnerData } from '../helpers/types';
+import { Board, IGameState, IWinnerData } from '../types';
 
 function TicTacToe() {
 

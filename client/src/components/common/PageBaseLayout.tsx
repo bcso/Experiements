@@ -2,9 +2,10 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Button, Navbar, Nav, NavDropdown, Container} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
-import styles from './PageBaseLayout.css';
+import styles from './PageBaseLayout.module.css';
+import { IPageBaseLayoutProps } from './types';
 
-function PageBaseLayout({children}) {
+function PageBaseLayout({children} : IPageBaseLayoutProps) {
     return(
         <>
             <Navbar bg="dark" variant="dark">
@@ -21,6 +22,9 @@ function PageBaseLayout({children}) {
                     </LinkContainer>
                     <LinkContainer to="/chat">
                         <Nav.Link>Chat</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to="/snake">
+                        <Nav.Link>Snake</Nav.Link>
                     </LinkContainer>
                     <LinkContainer to="/about">
                         <Nav.Link>About</Nav.Link>
