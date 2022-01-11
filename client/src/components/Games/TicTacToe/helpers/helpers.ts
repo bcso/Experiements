@@ -9,13 +9,13 @@ const _winningCharReplacements = {
 }
 
 const playerNames : IPlayers = {
-  P1: "MYPLAYER1",
-  P2: "MYPLAYER2"
+  P1: "P1",
+  P2: "P2"
 }
 
 const playerMarkers : IPlayerMarkers = {
-  "MYPLAYER1": "X",
-  "MYPLAYER2": "O"
+  "P1": "X",
+  "P2": "O"
 }
 
 // Default schema for gameState state
