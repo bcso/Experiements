@@ -1,5 +1,11 @@
-import { Coord, IEmpty, ISnakeBoardProps } from "../types";
+import { Coord, Coordinates, ISnakeBoardProps } from "../types";
 
+// Quick way to generate the initial
+//      snake
+//      food
+//      obstacle
+//      empty
+// coordinates
 export function getCoordsFromDrawnBoard()
 {
     const drawnBoard : Array<Array<string>> = [
@@ -17,17 +23,17 @@ export function getCoordsFromDrawnBoard()
         ["","","","","","","","","","","",]
     ]
 
-    const snakeCoordinates : Array<Coord> = findInBoard(drawnBoard, "s");
-    const foodCoordinates : Array<Coord> = findInBoard(drawnBoard, "f");
-    const obstaclesCoordinates : Array<Coord> = findInBoard(drawnBoard, "o");
-    const emptyCoordinates : Array<Coord> = findInBoard(drawnBoard, "");
+    const snakeCoordinates : Coordinates = findInBoard(drawnBoard, "s");
+    const foodCoordinates : Coordinates = findInBoard(drawnBoard, "f");
+    const obstaclesCoordinates : Coordinates = findInBoard(drawnBoard, "o");
+    const emptyCoordinates : Coordinates = findInBoard(drawnBoard, "");
 
     const vSize : number = drawnBoard.length;
     const hSize : number = drawnBoard[0].length;
 
-    function findInBoard(board : Array<Array<string>>, target : string) : Array<Coord>
+    function findInBoard(board : Array<Array<string>>, target : string) : Coordinates
     {
-        const out : Array<Coord> = [];
+        const out : Coordinates = [];
 
         for (let r = 0; r <board.length; r++)
         {
@@ -45,14 +51,16 @@ export function getCoordsFromDrawnBoard()
     }
 }
 
+// In case we wanted to input our sparse snake, food and obstacles directly we can use this
+// to calculate the remainder empty spaces
 function getEmptyCellsWithKnowns(
-    snakeCoordinates : Array<Coord>,
-    foodCoordinates : Array<Coord>,
-    obstaclesCoordiinates : Array<Coord>,
+    snakeCoordinates : Coordinates,
+    foodCoordinates : Coordinates,
+    obstaclesCoordiinates : Coordinates,
     vSize : number,
     hSize : number
 ) {
-    const emptyCoordinates : Array<Coord> = [];
+    const emptyCoordinates : Coordinates = [];
 
     for (let i=0; i<vSize; i++)
     {
@@ -74,10 +82,10 @@ function getEmptyCellsWithKnowns(
 export function initSnakeGameBoard() : ISnakeBoardProps {
 
     const coords = getCoordsFromDrawnBoard();
-    const snakeCoordinates : Array<Coord> = coords.snakeCoordinates;
-    const foodCoordinates : Array<Coord>  = coords.foodCoordinates;
-    const obstaclesCoordiinates : Array<Coord> = coords.obstaclesCoordinates;
-    const emptyCoordinates : Array<Coord> = coords.emptyCoordinates;
+    const snakeCoords : Coordinates = coords.snakeCoordinates;
+    const foodCoords : Coordinates  = coords.foodCoordinates;
+    const obstacleCoords : Coordinates = coords.obstaclesCoordinates;
+    const emptyCoords : Coordinates = coords.emptyCoordinates;
     const vSize : number = coords.vSize;
     const hSize : number = coords.hSize;
 
@@ -87,18 +95,18 @@ export function initSnakeGameBoard() : ISnakeBoardProps {
         currentDirection : [0 , 1],
         gameWin: false,
         snake: {
-            coordinates : snakeCoordinates,
+            coordinates : snakeCoords,
             aliveState : true
         },
         food : {
-            coordinates : foodCoordinates,
+            coordinates : foodCoords,
             consumed : false
         },
         obstacles : {
-            coordinates : obstaclesCoordiinates
+            coordinates : obstacleCoords
         },
         emptySpaces : {
-            coordinates : emptyCoordinates
+            coordinates : emptyCoords
         }
 
     }

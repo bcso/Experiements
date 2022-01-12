@@ -1,5 +1,6 @@
 export type Vector = [number, number];
 export type Coord = [number, number];
+export type Coordinates = Array<Coord>;
 
 export interface IGameState
 {
@@ -18,7 +19,7 @@ export interface ISnakeBoardProps {
 }
 
 export interface ICell {
-    coordinates : Array<Coord>;
+    coordinates : Coordinates;
 }
 
 export interface IObstacles extends ICell {
