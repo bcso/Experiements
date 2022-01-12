@@ -1,13 +1,57 @@
 import { Coord, IEmpty, ISnakeBoardProps } from "../types";
 
-export function initSnakeGameBoard() : ISnakeBoardProps {
+export function getCoordsFromDrawnBoard()
+{
+    const drawnBoard : Array<Array<string>> = [
+        ["","","","","","","","","","","",],
+        ["","","","","","","","","","","",],
+        ["","","","f","","","","","","","",],
+        ["","","","","","","","","","","",],
+        ["","","","","","","","","","","",],
+        ["","","","","","s","s","s","s","","",],
+        ["","","","","","","","","","","",],
+        ["","","","","","","","","","","",],
+        ["","","","o","","","","","","","",],
+        ["","","","","","","","","","","",],
+        ["","","","","","","","","","","",],
+        ["","","","","","","","","","","",]
+    ]
 
-    const snakeCoordinates : Array<Coord> = [[0,0], [0,1], [0,2]];
-    const foodCoordinates : Array<Coord>  = [[2,2]];
-    const obstaclesCoordiinates : Array<Coord> = [[3,3]];
-    const vSize : number = 15;
-    const hSize : number = 10;
+    const snakeCoordinates : Array<Coord> = findInBoard(drawnBoard, "s");
+    const foodCoordinates : Array<Coord> = findInBoard(drawnBoard, "f");
+    const obstaclesCoordinates : Array<Coord> = findInBoard(drawnBoard, "o");
+    const emptyCoordinates : Array<Coord> = findInBoard(drawnBoard, "");
 
+    const vSize : number = drawnBoard.length;
+    const hSize : number = drawnBoard[0].length;
+
+    function findInBoard(board : Array<Array<string>>, target : string) : Array<Coord>
+    {
+        const out : Array<Coord> = [];
+
+        for (let r = 0; r <board.length; r++)
+        {
+            for (let c = 0; c <board[0].length; c++)
+            {
+                if (drawnBoard[r][c] == target) out.push([r,c]);
+            }
+        }
+
+        return out;
+    }
+
+    return {
+        vSize, hSize, snakeCoordinates, foodCoordinates, obstaclesCoordinates, emptyCoordinates
+    }
+}
+
+function getEmptyCellsWithKnowns(
+    snakeCoordinates : Array<Coord>,
+    foodCoordinates : Array<Coord>,
+    obstaclesCoordiinates : Array<Coord>,
+    vSize : number,
+    hSize : number
+) {
     const emptyCoordinates : Array<Coord> = [];
 
     for (let i=0; i<vSize; i++)
@@ -23,6 +67,19 @@ export function initSnakeGameBoard() : ISnakeBoardProps {
             }
         }
     }
+
+    return emptyCoordinates;
+}
+
+export function initSnakeGameBoard() : ISnakeBoardProps {
+
+    const coords = getCoordsFromDrawnBoard();
+    const snakeCoordinates : Array<Coord> = coords.snakeCoordinates;
+    const foodCoordinates : Array<Coord>  = coords.foodCoordinates;
+    const obstaclesCoordiinates : Array<Coord> = coords.obstaclesCoordinates;
+    const emptyCoordinates : Array<Coord> = coords.emptyCoordinates;
+    const vSize : number = coords.vSize;
+    const hSize : number = coords.hSize;
 
     return {
         vSize : vSize,
