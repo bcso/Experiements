@@ -4,7 +4,7 @@ import PageInProgress from '../../../common/PageInProgress';
 import { initSnakeGameBoard } from '../helpers/helpers';
 import Board from './Board';
 
-function Snake() {
+function SnakeGame() {
 
     const [gameBoard, setBoardState] = useState(initSnakeGameBoard());
 
@@ -19,4 +19,4 @@ function Snake() {
     )
 }
 
-export default Snake;
+export default SnakeGame;

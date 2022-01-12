@@ -6,7 +6,7 @@ import TicTacToe from './components/Games/TicTacToe/components/Tictactoe';
 import ChatApp from './components/Games/ChatApp/ChatApp';
 import About from './components/About/About';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Snake from './components/Games/Snake/components/Snake';
+import Snake from './components/Games/Snake/components/SnakeGame';
 
 ReactDOM.render(
     <BrowserRouter>
