@@ -5,7 +5,8 @@ import { Coord, Coordinates, ISnakeBoardProps } from "../types";
 //      food
 //      obstacle
 //      empty
-// coordinates
+// coordinates. Modify drawnBoard to reflect the initial state of your board
+// the game will start with this
 export function getCoordsFromDrawnBoard()
 {
     const drawnBoard : Array<Array<string>> = [
@@ -56,7 +57,7 @@ export function getCoordsFromDrawnBoard()
 function getEmptyCellsWithKnowns(
     snakeCoordinates : Coordinates,
     foodCoordinates : Coordinates,
-    obstaclesCoordiinates : Coordinates,
+    obstaclesCoordinates : Coordinates,
     vSize : number,
     hSize : number
 ) {
@@ -69,7 +70,7 @@ function getEmptyCellsWithKnowns(
             const candidate : Coord = [i,j];
             if (!snakeCoordinates.includes(candidate) && 
                 !foodCoordinates.includes(candidate) && 
-                !obstaclesCoordiinates.includes(candidate))
+                !obstaclesCoordinates.includes(candidate))
             {
                 emptyCoordinates.push([i,j]);
             }
