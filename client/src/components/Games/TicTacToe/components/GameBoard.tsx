@@ -13,7 +13,7 @@ function GameBoard({gameState, onMoveInput} : IGameBoardProps) {
                             return (
                             <Col key={colIdx}
                                 style={{cursor: "pointer"}} 
-                                onClick={() => handleInput(
+                                onClick={() => onMoveInput(
                                     gameState.boardState.currentPlayer, 
                                     rowIdx, 
                                     colIdx)}
