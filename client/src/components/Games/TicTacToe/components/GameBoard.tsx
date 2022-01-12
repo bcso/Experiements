@@ -3,15 +3,6 @@ import {Container, Row, Col, Button} from 'react-bootstrap';
 import { IGameBoardProps } from '../types';
 
 function GameBoard({gameState, onMoveInput} : IGameBoardProps) {
-
-    function handleInput(
-        currentPlayer: string, 
-        moveRow: number, 
-        moveCol: number) : void
-    {
-        onMoveInput(currentPlayer, moveRow, moveCol);
-    }
-
     return (
         <>
         <Container>
