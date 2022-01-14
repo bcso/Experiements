@@ -1,4 +1,4 @@
-import { Coord, Coordinates, ISnakeBoardProps } from "../types";
+import { Coord, Coordinates, ISnakeBoardProps, Vector } from "../types";
 
 // Quick way to generate the initial
 //      snake
@@ -15,7 +15,7 @@ export function getCoordsFromDrawnBoard()
         ["","","","f","","","","","","","",],
         ["","","","","","","","","","","",],
         ["","","","","","","","","","","",],
-        ["","","","","","s","s","s","s","","",],
+        ["","","","s","s","s","","","","","",],
         ["","","","","","","","","","","",],
         ["","","","","","","","","","","",],
         ["","","","o","","","","","","","",],
@@ -81,7 +81,6 @@ function getEmptyCellsWithKnowns(
 }
 
 export function initSnakeGameBoard() : ISnakeBoardProps {
-
     const coords = getCoordsFromDrawnBoard();
     const snakeCoords : Coordinates = coords.snakeCoordinates;
     const foodCoords : Coordinates  = coords.foodCoordinates;
@@ -93,7 +92,6 @@ export function initSnakeGameBoard() : ISnakeBoardProps {
     return {
         vSize : vSize,
         hSize : hSize,
-        currentDirection : [0 , 1],
         gameWin: false,
         snake: {
             coordinates : snakeCoords,
@@ -109,6 +107,10 @@ export function initSnakeGameBoard() : ISnakeBoardProps {
         emptySpaces : {
             coordinates : emptyCoords
         }
-
     }
+}
+
+export function initVector() : Vector{
+    const initDirection : Vector  = [0, 1];
+    return initDirection;
 }
