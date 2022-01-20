@@ -53,7 +53,12 @@ function ToDo(){
         {
             if ((todosUpdated[i] as TodoBase).id === id)
             {
+                // Set the new state
                 todosUpdated[i].isComplete = !todosUpdated[i].isComplete;
+                
+                // Update the css
+                const label = document.querySelector<HTMLElement>(`label[for="${todosUpdated[i].id}"]`);
+                label.style.textDecoration = todosUpdated[i].isComplete ? "line-through" : "none";
             }
         }
         setTodos(todosUpdated);
