@@ -18,7 +18,12 @@ function ToDo(){
         {
             const currTodo : TodoBase = todos[i];
             const currLabel : HTMLElement = document.querySelector<HTMLElement>(`label[for="${currTodo.id}"]`);
-            currLabel.style.textDecoration = currTodo.isComplete ? "line-through" : "none";
+            if (currLabel != null)
+            {
+                currLabel.style.textDecoration = currTodo.isComplete ? "line-through" : "none";
+            } else {
+                throw("Tried to set effect on null label");
+            }
         }
         storage.setItem("savedTodos", JSON.stringify(todos));
     }, [(todos as Array<TodoBase>).map((td : TodoBase) => {return td.isComplete})]);
