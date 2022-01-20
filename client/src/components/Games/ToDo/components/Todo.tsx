@@ -22,7 +22,7 @@ function ToDo(){
             {
                 currLabel.style.textDecoration = currTodo.isComplete ? "line-through" : "none";
             } else {
-                throw("Tried to set effect on null label");
+                console.error("Tried to set effect on null label");
             }
         }
         storage.setItem("savedTodos", JSON.stringify(todos));
