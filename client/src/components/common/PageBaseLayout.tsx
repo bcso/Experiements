@@ -20,11 +20,14 @@ function PageBaseLayout({children} : IPageBaseLayoutProps) {
                     <LinkContainer to="/toe">
                         <Nav.Link>Toe</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to="/chat">
-                        <Nav.Link>Chat</Nav.Link>
-                    </LinkContainer>
                     <LinkContainer to="/snake">
                         <Nav.Link>Snake</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to="/todo">
+                        <Nav.Link>Todo</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to="/chat">
+                        <Nav.Link>Chat</Nav.Link>
                     </LinkContainer>
                     <LinkContainer to="/about">
                         <Nav.Link>About</Nav.Link>

@@ -7,6 +7,7 @@ import ChatApp from './components/Games/ChatApp/ChatApp';
 import About from './components/About/About';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Snake from './components/Games/Snake/components/SnakeGame';
+import ToDo from './components/Games/ToDo/components/Todo';
 
 ReactDOM.render(
     <BrowserRouter>
@@ -15,8 +16,8 @@ ReactDOM.render(
             <Route path="toe" element={<TicTacToe/>} />
             <Route path="chat" element={<ChatApp/>} />
             <Route path="snake" element={<Snake/>} />
+            <Route path="todo" element={<ToDo/>} />
             <Route path="about" element={<About />} />
-            
             {/* Navigate back to home for any routes we don't recognize */}
             <Route path="*" element={<Navigate to="/" />}/>
         </Routes>

@@ -1,0 +1,16 @@
+.itemCompleteTrue
+{
+    text-decoration: line-through;
+}
+
+.itemCompleteFalse
+{
+    text-decoration: none;
+}
+
+.formContainer
+{
+    margin: auto;
+    margin-top: 50px;
+    width: 50%;
+}
