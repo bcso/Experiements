@@ -8,4 +8,5 @@ export interface TodoBase
 export interface TodoProps extends TodoBase
 {
     onCompleteToggle : (id : string) => void
+    onDeletePress : (id : string) => void
 }

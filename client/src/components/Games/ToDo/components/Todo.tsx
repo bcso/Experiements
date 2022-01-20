@@ -1,18 +1,16 @@
 import React, { KeyboardEvent, useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import PageBaseLayout from "../../../common/PageBaseLayout";
-import {v4 as uuidv4} from "uuid";
 import TodoItem from "./TodoItem";
 import styles from "../css/TodoItem.module.css";
 import { TodoBase } from "../types";
+import { buildTodo, getStorage, initTodos, persistTodosInLocalStorage } from "../helpers/helpers";
 
 function ToDo(){
 
-    const [todos, setTodos] = useState([{
-        id: uuidv4(),
-        todoString: "Welcome!",
-        isComplete: false
-    }]);
+    const storage = getStorage();
+
+    const [todos, setTodos] = useState(initTodos());
 
     // When isComplete changes on any todo, trigger this side effect - update the strike through of each item
     useEffect(() => {
@@ -22,6 +20,7 @@ function ToDo(){
             const currLabel : HTMLElement = document.querySelector<HTMLElement>(`label[for="${currTodo.id}"]`);
             currLabel.style.textDecoration = currTodo.isComplete ? "line-through" : "none";
         }
+        storage.setItem("savedTodos", JSON.stringify(todos));
     }, [(todos as Array<TodoBase>).map((td : TodoBase) => {return td.isComplete})]);
 
     // When the length of our list changes (new todo is added), trigger this side effect - clear the text input
@@ -29,15 +28,10 @@ function ToDo(){
         (document.getElementById("todoInput") as HTMLInputElement).value = "";
     } , [todos.length]);
 
-    function buildTodo(textVal : string, isComplete : boolean = false) : TodoBase
-    {
-        const newTodo : TodoBase = {
-            id: uuidv4(),
-            todoString: textVal,
-            isComplete: isComplete
-        }
-        return newTodo;
-    }
+    // Whenever anything change with todos, we want to persist the state
+    useEffect(() => {
+        persistTodosInLocalStorage(todos);
+    }, [todos]);
 
     function handleAddTodo(e : any) : void
     {
@@ -76,6 +70,21 @@ function ToDo(){
         setTodos(todosUpdated);
     }
 
+    function onDeletePress(id: string) : void
+    {
+        const todosUpdated : Array<TodoBase> = [];
+        for (let i=0; i< todos.length; i++)
+        {
+            const todoItem : TodoBase = {...todos[i]};
+            if (todoItem.id !== id)
+            {
+                // Set the new state
+                todosUpdated.push(todoItem);
+            }
+        }
+        setTodos(todosUpdated);
+    }
+
     return(
         <PageBaseLayout>
             <div className={styles.formContainer}>
@@ -85,7 +94,6 @@ function ToDo(){
                             id="todoInput" size="lg" type="text" placeholder="What do we want to get done?" 
                             onKeyDown={(e) => textInputKeyDown(e)}
                         />
-                        {/* <Button variant="primary" onClick={(e) => handleAddTodo(e)}>Add Todo</Button> */}
                     </Form.Group>
                     <Form.Group className="mb-3">
                         {todos.map(
@@ -93,6 +101,7 @@ function ToDo(){
                                 return(<TodoItem 
                                     {...todo}
                                     onCompleteToggle={onCompleteToggle}
+                                    onDeletePress={onDeletePress}
                                     key={todo.id}
                                 />)
                             }
