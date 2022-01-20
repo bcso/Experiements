@@ -11,21 +11,21 @@ const defaultTodo : TodoBase = {
 
 export function initTodos() : Array<TodoBase>
 {
+    let tds : Array<TodoBase> = [defaultTodo];
     try {
         const storedTodosString : string = storage.getItem("savedTodos");
+        
         if (storedTodosString != null)
         {
-            const tds : Array<TodoBase> = JSON.parse(storage.getItem("savedTodos"));
-            return tds;
-        } else {
-            console.log("nothing found");
-            return [defaultTodo];
+            tds = JSON.parse(storage.getItem("savedTodos")) as Array<TodoBase>;
         }
+        return tds;
     }
     catch (e)
     {
         // if we couldn't parse the json input, just use the default value
-        return [defaultTodo];
+        console.log(e);
+        return tds;
     }
 }
 
