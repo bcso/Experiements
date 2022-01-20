@@ -25,7 +25,6 @@ function ToDo(){
                 console.error("Tried to set effect on null label");
             }
         }
-        storage.setItem("savedTodos", JSON.stringify(todos));
     }, [(todos as Array<TodoBase>).map((td : TodoBase) => {return td.isComplete})]);
 
     // When the length of our list changes (new todo is added), trigger this side effect - clear the text input
