@@ -3,8 +3,8 @@ import { Row, Container, Form, Button } from "react-bootstrap";
 import PageBaseLayout from "../../../common/PageBaseLayout";
 import {v4 as uuidv4, V4Options} from "uuid";
 import TodoItem from "./TodoItem";
-import { TodoFields } from "../types";
 import styles from "../css/TodoItem.module.css";
+import { TodoBase } from "../types";
 
 function ToDo(){
 
@@ -14,7 +14,7 @@ function ToDo(){
         isComplete: false
     }]);
 
-    function buildTodo(textVal : string, isComplete : boolean = false)
+    function buildTodo(textVal : string, isComplete : boolean = false) : TodoBase
     {
         return {
             id: uuidv4(),
@@ -51,7 +51,7 @@ function ToDo(){
         const todosUpdated = [...todos];
         for (let i=0; i< todosUpdated.length; i++)
         {
-            if ((todosUpdated[i] as TodoFields).id === id)
+            if ((todosUpdated[i] as TodoBase).id === id)
             {
                 todosUpdated[i].isComplete = !todosUpdated[i].isComplete;
             }
@@ -74,11 +74,9 @@ function ToDo(){
                         {todos.map(
                             (todo) => {
                                 return(<TodoItem 
-                                    key={todo.id}
-                                    id={todo.id}
-                                    todoString={todo.todoString}
-                                    isComplete={todo.isComplete}
+                                    {...todo}
                                     onCompleteToggle={onCompleteToggle}
+                                    key={todo.id}
                                 />)
                             }
                         )}

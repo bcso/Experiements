@@ -1,7 +1,11 @@
-export interface TodoFields
+export interface TodoBase
 {
     id : string,
     todoString: string,
-    isComplete: boolean,
+    isComplete: boolean
+}
+
+export interface TodoProps extends TodoBase
+{
     onCompleteToggle : (id : string) => void
 }

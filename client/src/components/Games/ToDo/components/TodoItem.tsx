@@ -1,9 +1,9 @@
 import React from "react";
 import { Form, Row } from "react-bootstrap";
-import { TodoFields } from "../types";
+import { TodoProps } from "../types";
 import styles from "../css/TodoItem.module.css";
 
-function TodoItem({id, todoString, isComplete, onCompleteToggle} : TodoFields)
+function TodoItem({id, todoString, isComplete, onCompleteToggle} : TodoProps)
 {
     return (
         <Form.Check 
