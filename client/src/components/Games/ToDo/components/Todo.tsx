@@ -14,7 +14,8 @@ function ToDo(){
         isComplete: false
     }]);
 
-    function buildTodo(textVal : string, isComplete : boolean = false) {
+    function buildTodo(textVal : string, isComplete : boolean = false)
+    {
         return {
             id: uuidv4(),
             todoString: textVal,
@@ -22,7 +23,8 @@ function ToDo(){
         }
     }
 
-    function handleAddTodo(e : any) {
+    function handleAddTodo(e : any) : void
+    {
         e.preventDefault();
         let textVal = (document.getElementById("todoInput") as HTMLInputElement).value;
         if (textVal)
@@ -35,7 +37,8 @@ function ToDo(){
         }
     }
 
-    function textInputKeyDown(e : KeyboardEvent) {
+    function textInputKeyDown(e : KeyboardEvent) : void
+    {
         if (e.key === 'Enter')
         {
             handleAddTodo(e);
@@ -43,7 +46,7 @@ function ToDo(){
     }
 
     // Hoist our state
-    function onCompleteToggle(id: string)
+    function onCompleteToggle(id: string) : void
     {
         const todosUpdated = [...todos];
         for (let i=0; i< todosUpdated.length; i++)
