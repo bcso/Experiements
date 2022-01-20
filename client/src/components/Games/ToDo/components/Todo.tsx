@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, useState } from "react";
+import React, { KeyboardEvent, useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import PageBaseLayout from "../../../common/PageBaseLayout";
 import {v4 as uuidv4} from "uuid";
@@ -14,24 +14,39 @@ function ToDo(){
         isComplete: false
     }]);
 
+    // When isComplete changes on any todo, trigger this side effect - update the strike through of each item
+    useEffect(() => {
+        for (let i=0; i< todos.length; i++)
+        {
+            const currTodo : TodoBase = todos[i];
+            const currLabel : HTMLElement = document.querySelector<HTMLElement>(`label[for="${currTodo.id}"]`);
+            currLabel.style.textDecoration = currTodo.isComplete ? "line-through" : "none";
+        }
+    }, [(todos as Array<TodoBase>).map((td : TodoBase) => {return td.isComplete})]);
+
+    // When the length of our list changes (new todo is added), trigger this side effect - clear the text input
+    useEffect(() => {
+        (document.getElementById("todoInput") as HTMLInputElement).value = "";
+    } , [todos.length]);
+
     function buildTodo(textVal : string, isComplete : boolean = false) : TodoBase
     {
-        return {
+        const newTodo : TodoBase = {
             id: uuidv4(),
             todoString: textVal,
             isComplete: isComplete
         }
+        return newTodo;
     }
 
     function handleAddTodo(e : any) : void
     {
         e.preventDefault();
-        let textVal = (document.getElementById("todoInput") as HTMLInputElement).value;
+        const textVal : string = (document.getElementById("todoInput") as HTMLInputElement).value;
         if (textVal)
         {
-            (document.getElementById("todoInput") as HTMLInputElement).value = "";
-            const newTodo = buildTodo(textVal);
-            const todosUpdated = [...todos];
+            const newTodo : TodoBase = buildTodo(textVal);
+            const todosUpdated : Array<TodoBase> = [...todos];
             todosUpdated.push(newTodo);
             setTodos(todosUpdated);
         }
@@ -48,17 +63,14 @@ function ToDo(){
     // Hoist our state
     function onCompleteToggle(id: string) : void
     {
-        const todosUpdated = [...todos];
+        const todosUpdated : Array<TodoBase> = [...todos];
         for (let i=0; i< todosUpdated.length; i++)
         {
-            if ((todosUpdated[i] as TodoBase).id === id)
+            const todoItem : TodoBase = todosUpdated[i];
+            if (todoItem.id === id)
             {
                 // Set the new state
-                todosUpdated[i].isComplete = !todosUpdated[i].isComplete;
-                
-                // Update the css
-                const label = document.querySelector<HTMLElement>(`label[for="${todosUpdated[i].id}"]`);
-                label.style.textDecoration = todosUpdated[i].isComplete ? "line-through" : "none";
+                todoItem.isComplete = !todoItem.isComplete;
             }
         }
         setTodos(todosUpdated);
