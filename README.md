@@ -69,7 +69,7 @@ This will copy over the built changes (from `/dist`) in step 2.1 to a new docker
 
 1. `firebase deploy`
 
-2. visit https://gamesapp-26c11.web.app/ 
+2. visit https://experiments-eb118.web.app/
 
 # Todo
 
