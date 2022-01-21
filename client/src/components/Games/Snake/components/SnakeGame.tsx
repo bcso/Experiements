@@ -12,12 +12,12 @@ function SnakeGame() {
 
     return(
         <PageBaseLayout pageTitle="Snake">
-            {/* <PageInProgress 
+            <PageInProgress 
                 pageTitle="Snake"
-                pageDescription="This is a work in progress page for the Snake game!"/> */}
+                pageDescription="This is a work in progress page for the Snake game!"/>
             
-            <Board {...gameBoard} />
-            <Keypad />
+            {/* <Board {...gameBoard} />
+            <Keypad /> */}
         </PageBaseLayout>
     )
 }
