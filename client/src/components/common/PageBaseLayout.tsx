@@ -8,33 +8,33 @@ import { IPageBaseLayoutProps } from './types';
 function PageBaseLayout({children} : IPageBaseLayoutProps) {
     return(
         <>
-            <Navbar bg="dark" variant="dark">
-            <Container>
-                <Navbar.Brand>Experiements</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                    <LinkContainer to="/">
-                        <Nav.Link>Home</Nav.Link>
-                    </LinkContainer>
-                    <LinkContainer to="/toe">
-                        <Nav.Link>Toe</Nav.Link>
-                    </LinkContainer>
-                    <LinkContainer to="/snake">
-                        <Nav.Link>Snake</Nav.Link>
-                    </LinkContainer>
-                    <LinkContainer to="/todo">
-                        <Nav.Link>Todo</Nav.Link>
-                    </LinkContainer>
-                    <LinkContainer to="/chat">
-                        <Nav.Link>Chat</Nav.Link>
-                    </LinkContainer>
-                    <LinkContainer to="/about">
-                        <Nav.Link>About</Nav.Link>
-                    </LinkContainer>
-                </Nav>
-                </Navbar.Collapse>
-            </Container>
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <Container>
+                    <Navbar.Brand>Experiements</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="me-auto">
+                            <LinkContainer to="/">
+                                <Nav.Link>Home</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to="/toe">
+                                <Nav.Link>Toe</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to="/snake">
+                                <Nav.Link>Snake</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to="/todo">
+                                <Nav.Link>Todo</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to="/chat">
+                                <Nav.Link>Chat</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to="/about">
+                                <Nav.Link>About</Nav.Link>
+                            </LinkContainer>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
             </Navbar>
 
             <div className={styles.contentRootContainer}>
