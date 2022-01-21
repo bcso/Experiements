@@ -13,11 +13,11 @@ ReactDOM.render(
     <BrowserRouter>
         <Routes>
             <Route path="/" element={<App/>}> </Route>
-            <Route path="toe" element={<TicTacToe/>} />
-            <Route path="chat" element={<ChatApp/>} />
-            <Route path="snake" element={<Snake/>} />
-            <Route path="todo" element={<ToDo/>} />
-            <Route path="about" element={<About />} />
+            <Route path="/toe" element={<TicTacToe/>} />
+            <Route path="/chat" element={<ChatApp/>} />
+            <Route path="/snake" element={<Snake/>} />
+            <Route path="/todo" element={<ToDo/>} />
+            <Route path="/about" element={<About />} />
             {/* Navigate back to home for any routes we don't recognize */}
             <Route path="*" element={<Navigate to="/" />}/>
         </Routes>
