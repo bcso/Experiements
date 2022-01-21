@@ -5,6 +5,33 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "redirects" : [
+      {
+        "source" : "/toe",
+        "destination" : "/",
+        "type": 301
+      },
+      {
+        "source" : "/snake",
+        "destination" : "/",
+        "type": 301
+      },
+      {
+        "source" : "/todo",
+        "destination" : "/",
+        "type": 301
+      },
+      {
+        "source" : "/chat",
+        "destination" : "/",
+        "type": 301
+      },
+      {
+        "source" : "/about",
+        "destination" : "/",
+        "type": 301
+      }
     ]
   }
 }
