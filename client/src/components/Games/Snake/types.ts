@@ -39,6 +39,8 @@ export interface IFood extends ICell {
 
 export interface ISnake extends ICell {
     aliveState: boolean;
+    head: Coord;
+    tail: Coord;
 }
 
 export interface IEmpty extends ICell {

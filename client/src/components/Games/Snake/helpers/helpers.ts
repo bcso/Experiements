@@ -10,18 +10,20 @@ import { Coord, Coordinates, ISnakeBoardProps, Vector } from "../types";
 export function getCoordsFromDrawnBoard()
 {
     const drawnBoard : Array<Array<string>> = [
-        ["","","","","","","","","","","",],
-        ["","","","","","","","","","","",],
-        ["","","","f","","","","","","","",],
-        ["","","","","","","","","","","",],
-        ["","","","","","","","","","","",],
-        ["","","","s","s","s","","","","","",],
-        ["","","","","","","","","","","",],
-        ["","","","","","","","","","","",],
-        ["","","","o","","","","","","","",],
-        ["","","","","","","","","","","",],
-        ["","","","","","","","","","","",],
-        ["","","","","","","","","","","",]
+        ["","","","","","","","","","","","","",""],
+        ["","","","","","","f","","","","","","",""],
+        ["","","","","","","","","","","","","",""],
+        ["","","","","","","","","","","","","",""],
+        ["","","","","","","","","","","","","",""],
+        ["","","","s","s","s","s","s","","","","","",""],
+        ["","","","","","","","","","","","","",""],
+        ["","","","","","","","","","","","","",""],
+        ["","","","o","","","","","","","","","",""],
+        ["","","","","","","","","","","","","",""],
+        ["","","","","","","","","","","","","",""],
+        ["","","","","","","","o","","","","","",""],
+        ["","","","","","","","","","","","","",""],
+        ["","","","","","","","","","","","","",""]
     ]
 
     const snakeCoordinates : Coordinates = findInBoard(drawnBoard, "s");
@@ -80,6 +82,16 @@ function getEmptyCellsWithKnowns(
     return emptyCoordinates;
 }
 
+export function coordsContainsTarget(parent : Coordinates, target : Coord) : boolean
+{
+    for (let idx=0; idx<parent.length; idx++)
+    {
+        if (parent[idx][0] == target[0] &&
+            parent[idx][1] == target[1]) return true;
+    }
+    return false;
+}
+
 export function initSnakeGameBoard() : ISnakeBoardProps {
     const coords = getCoordsFromDrawnBoard();
     const snakeCoords : Coordinates = coords.snakeCoordinates;
@@ -95,7 +107,9 @@ export function initSnakeGameBoard() : ISnakeBoardProps {
         gameWin: false,
         snake: {
             coordinates : snakeCoords,
-            aliveState : true
+            aliveState : true,
+            head : snakeCoords[snakeCoords.length - 1],
+            tail : snakeCoords[0]
         },
         food : {
             coordinates : foodCoords,

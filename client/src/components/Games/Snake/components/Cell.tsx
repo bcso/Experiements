@@ -5,8 +5,8 @@ function Cell({color = "black"}){
         <>
         <div style={
             {
-                height : "10px",
-                width : "10px",
+                height : "30px",
+                width : "30px",
                 backgroundColor : color,
                 padding: "0px",
                 margin: "1px"
