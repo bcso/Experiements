@@ -45,6 +45,13 @@ function Board({...gameBoard} : ISnakeBoardProps) {
     1. Snake eat food
         coordsContainsTarget(foodCoords, snakeProp.head)
 
+    EventQueue : last button input before TickInterval is flushed to EventQueue
+        Types of events:
+            --> Move Change Event --> mutates the gameBoard.currentDirection field
+            --> TickInterval Speedup Event --> decreases the TickInterval state
+
+    ProcessEvent --> at TickInterval process the event from EventQueue
+
     */
 
     function drawBoard(
