@@ -65,27 +65,27 @@ function Board({...gameBoard} : ISnakeBoardProps) {
         let board = [];
         for (let y = 0; y<vSize; y++) board.push(Array.from('x'.repeat(hSize)));
 
-        return board.map((row, yIdx) => {
-            return <Row>{
-                row.map((_, xIdx) => {
-                    const currCoord : Coord = [yIdx, xIdx];
-                    if (coordsContainsTarget(emptySpaceCoords, currCoord))
-                    {
-                        return <Cell/>
-                    } else if (coordsContainsTarget(snakeCoords, currCoord))
-                    {
-                        return <Cell color="blue"/>
-                    } else if (coordsContainsTarget(foodCoords, currCoord))
-                    {
-                        return <Cell color="white"/>
-                    } else if (coordsContainsTarget(obstacleCoords, currCoord))
-                    {
-                        return <Cell color="brown"/>
+        return (board.map((row, yIdx) => {
+            return (<Row>
+                {row.map((_, xIdx) => {
+                        const currCoord : Coord = [yIdx, xIdx];
+                        if (coordsContainsTarget(emptySpaceCoords, currCoord))
+                        {
+                            return <Cell/>
+                        } else if (coordsContainsTarget(snakeCoords, currCoord))
+                        {
+                            return <Cell color="blue"/>
+                        } else if (coordsContainsTarget(foodCoords, currCoord))
+                        {
+                            return <Cell color="white"/>
+                        } else if (coordsContainsTarget(obstacleCoords, currCoord))
+                        {
+                            return <Cell color="brown"/>
+                        }
                     }
-                })
-            }
-            </Row>
-        })
+                )}
+            </Row>)
+        }))
     }
 
     return (
