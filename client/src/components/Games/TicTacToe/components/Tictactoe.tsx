@@ -97,6 +97,7 @@ function TicTacToe() {
             <Container className={styles.ttcRootContainer}>
                 <Row>
                     <Col>
+                        {/* Hoist our State */}
                         <GameBoard gameState={gameState} onMoveInput={handleMoveInput}></GameBoard>
                     </Col>
                     <Col className={styles.moveHistoryCenter}>
