@@ -30,7 +30,7 @@ function SnakeGame() {
 
     function onKeypadPress(direction: string)
     {
-        // updateCurrVector(direction);
+        updateCurrVector(direction);
     }
 
     function handleKeyDown(e : KeyboardEvent)
@@ -58,7 +58,7 @@ function SnakeGame() {
                 pageDescription="This is a work in progress page for the Snake game!"/> */}
             
             <Board {...gameBoard} />
-            <Keypad onKeypadPress={(d) => onKeypadPress(d)}/>
+            <Keypad onKeypadPress={onKeypadPress}/>
         </PageBaseLayout>
     )
 }
