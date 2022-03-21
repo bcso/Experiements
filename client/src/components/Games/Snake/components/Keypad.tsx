@@ -11,17 +11,16 @@ function Keypad({...KeypadProps} : IKeypadProps) {
     }
 
     return (
-        <>
-        
-        <div className={styles.keypadContainer}>
-            <Button size='lg' className={styles.keypadButton} onClick={() => handleKeypadPress("Up")}>^</Button>
+        <div>
+            <div className={styles.keypadContainer}>
+                <Button size='lg' className={styles.keypadButton} onClick={() => handleKeypadPress("Up")}>^</Button>
+            </div>
+            <div className={styles.keypadContainer}>
+                <Button size='lg' className={styles.keypadButton} onClick={() => handleKeypadPress("Left")}>&lt;</Button>
+                <Button size='lg' className={styles.keypadButton} onClick={() => handleKeypadPress("Down")}>v</Button>
+                <Button size='lg' className={styles.keypadButton} onClick={() => handleKeypadPress("Right")}>&gt;</Button>
+            </div>
         </div>
-        <div className={styles.keypadContainer}>
-            <Button size='lg' className={styles.keypadButton} onClick={() => handleKeypadPress("Left")}>&lt;</Button>
-            <Button size='lg' className={styles.keypadButton} onClick={() => handleKeypadPress("Down")}>v</Button>
-            <Button size='lg' className={styles.keypadButton} onClick={() => handleKeypadPress("Right")}>&gt;</Button>
-        </div>
-        </>
     )
 }
 
