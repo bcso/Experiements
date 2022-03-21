@@ -1,5 +1,5 @@
 import React, { EventHandler } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Row } from "react-bootstrap";
 import { IKeypadProps, Vector } from "../types";
 import styles from "../css/Keypad.module.css";
 function Keypad({...KeypadProps} : IKeypadProps) {
@@ -11,12 +11,17 @@ function Keypad({...KeypadProps} : IKeypadProps) {
     }
 
     return (
+        <>
+        
         <div className={styles.keypadContainer}>
-            <Button onClick={() => handleKeypadPress("Up")}>Up</Button>
-            <Button onClick={() => handleKeypadPress("Down")}>Down</Button>
-            <Button onClick={() => handleKeypadPress("Right")}>Right</Button>
-            <Button onClick={() => handleKeypadPress("Left")}>Left</Button>
+            <Button size='lg' className={styles.keypadButton} onClick={() => handleKeypadPress("Up")}>^</Button>
         </div>
+        <div className={styles.keypadContainer}>
+            <Button size='lg' className={styles.keypadButton} onClick={() => handleKeypadPress("Left")}>&lt;</Button>
+            <Button size='lg' className={styles.keypadButton} onClick={() => handleKeypadPress("Down")}>v</Button>
+            <Button size='lg' className={styles.keypadButton} onClick={() => handleKeypadPress("Right")}>&gt;</Button>
+        </div>
+        </>
     )
 }
 
