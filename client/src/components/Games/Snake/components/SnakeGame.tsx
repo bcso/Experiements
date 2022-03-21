@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PageBaseLayout from '../../../common/PageBaseLayout';
 import PageInProgress from '../../../common/PageInProgress';
-import { initSnakeGameBoardState, initVector, vectorStringMap } from '../helpers/helpers';
+import { initSnakeGameBoardState, vectorStringMap } from '../helpers/helpers';
 import { Vector } from '../types';
 import Board from './Board';
 import Keypad from './Keypad';

@@ -128,11 +128,6 @@ export function initSnakeGameBoardState() : ISnakeBoardProps {
         emptySpaces : {
             coordinates : emptyCoords
         },
-        currentVector : [0, 1]
+        currentVector : [1, 0] // right is the first vector
     }
-}
-
-export function initVector() : Vector{
-    const initDirection : Vector  = [0, 1];
-    return initDirection;
 }
