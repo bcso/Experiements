@@ -5,17 +5,6 @@ import { Vector, Coord, Coordinates, IEmpty, ISnake, IFood, ISnakeBoardProps, IO
 import Cell from "./Cell";
 import {coordsContainsTarget} from "../helpers/helpers";
 
-// (parameter) gameBoard: {
-//     vSize: number;
-//     hSize: number;
-//     currentDirection: Vector;
-//     gameWin: boolean;
-//     snake: ISnake;
-//     food: IFood;
-//     obstacles?: IObstacles;
-//     emptySpaces: IEmpty;
-// }
-
 function Board({...props} : ISnakeBoardProps) {
 
     const currentVector : Vector = props.currentVector;
@@ -49,7 +38,7 @@ function Board({...props} : ISnakeBoardProps) {
 
     EventQueue : last button input before TickInterval is flushed to EventQueue
         Types of events:
-            --> Move Change Event --> mutates the gameBoard.currentDirection field
+            --> Move Change Event --> mutates the gameBoardState.currentDirection field
             --> TickInterval Speedup Event --> decreases the TickInterval state
 
     ProcessEvent --> at TickInterval process the event from EventQueue

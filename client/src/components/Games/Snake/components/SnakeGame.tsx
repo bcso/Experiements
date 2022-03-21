@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import PageBaseLayout from '../../../common/PageBaseLayout';
 import PageInProgress from '../../../common/PageInProgress';
-import { initSnakeGameBoard, initVector, vectorStringMap } from '../helpers/helpers';
+import { initSnakeGameBoardState, initVector, vectorStringMap } from '../helpers/helpers';
 import { Vector } from '../types';
 import Board from './Board';
 import Keypad from './Keypad';
 
 function SnakeGame() {
 
-    const [gameBoard, setBoardState] = useState(initSnakeGameBoard());
+    const [gameBoardState, setBoardState] = useState(initSnakeGameBoardState());
 
     // We need to be able to detect user UDLR keypad input
     // Do this only once : on SnakeGame component's first render, add the
@@ -27,7 +27,7 @@ function SnakeGame() {
 
     function updateCurrVector(direction: string)
     {
-        const newState = {...gameBoard};
+        const newState = {...gameBoardState};
         newState.currentVector = vectorStringMap[direction];
         setBoardState(newState);
     }
@@ -61,7 +61,7 @@ function SnakeGame() {
                 pageTitle="Snake"
                 pageDescription="This is a work in progress page for the Snake game!"/> */}
             
-            <Board {...gameBoard} />
+            <Board {...gameBoardState} />
             <Keypad onKeypadPress={onKeypadPress}/>
         </PageBaseLayout>
     )

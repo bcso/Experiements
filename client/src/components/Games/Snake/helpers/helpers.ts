@@ -99,7 +99,7 @@ export function coordsContainsTarget(parent : Coordinates, target : Coord) : boo
     return false;
 }
 
-export function initSnakeGameBoard() : ISnakeBoardProps {
+export function initSnakeGameBoardState() : ISnakeBoardProps {
     const coords = getCoordsFromDrawnBoard();
     const snakeCoords : Coordinates = coords.snakeCoordinates;
     const foodCoords : Coordinates  = coords.foodCoordinates;
