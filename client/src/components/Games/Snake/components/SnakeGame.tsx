@@ -10,6 +10,11 @@ function SnakeGame() {
 
     const [gameBoard, setBoardState] = useState(initSnakeGameBoard());
 
+    // We need to be able to detect user UDLR keypad input
+    // Do this only once : on SnakeGame component's first render, add the
+    // event listener handleKeyDown to keydown, and on the component unmount
+    // clean it up by returning
+    // source : https://www.pluralsight.com/guides/event-listeners-in-react-components
     React.useEffect(() => {
         // do this on first render
         window.addEventListener("keydown", handleKeyDown);
@@ -22,7 +27,6 @@ function SnakeGame() {
 
     function updateCurrVector(direction: string)
     {
-        console.log(direction);
         const newState = {...gameBoard};
         newState.currentVector = vectorStringMap[direction];
         setBoardState(newState);
