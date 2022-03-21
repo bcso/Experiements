@@ -1,5 +1,12 @@
 import { Coord, Coordinates, ISnakeBoardProps, Vector } from "../types";
 
+export const vectorStringMap : {[dirAsString : string] : Vector} = {
+    "Up" : [0,1],
+    "Down": [0,-1],
+    "Right": [1,0],
+    "Left": [-1,0]
+}
+
 // Quick way to generate the initial
 //      snake
 //      food
@@ -120,7 +127,8 @@ export function initSnakeGameBoard() : ISnakeBoardProps {
         },
         emptySpaces : {
             coordinates : emptyCoords
-        }
+        },
+        currentVector : [0, 1]
     }
 }
 

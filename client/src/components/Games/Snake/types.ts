@@ -10,6 +10,11 @@ export type Vector = [number, number];
 export type Coord = [number, number];
 export type Coordinates = Array<Coord>;
 
+export interface IKeypadProps 
+{
+    onKeypadPress: (v : string) => void;
+}
+
 export interface IGameState
 {
 
@@ -22,7 +27,8 @@ export interface ISnakeBoardProps {
     snake: ISnake,
     food: IFood,
     obstacles?: IObstacles,
-    emptySpaces: IEmpty
+    emptySpaces: IEmpty,
+    currentVector: Vector
 }
 
 export interface ICell {

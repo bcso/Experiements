@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
 import styles from "../css/Board.module.css";
-import { Coord, Coordinates, IEmpty, ISnake, IFood, ISnakeBoardProps, IObstacles } from "../types";
+import { Vector, Coord, Coordinates, IEmpty, ISnake, IFood, ISnakeBoardProps, IObstacles } from "../types";
 import Cell from "./Cell";
 import {coordsContainsTarget} from "../helpers/helpers";
 
@@ -16,15 +16,17 @@ import {coordsContainsTarget} from "../helpers/helpers";
 //     emptySpaces: IEmpty;
 // }
 
-function Board({...gameBoard} : ISnakeBoardProps) {
+function Board({...props} : ISnakeBoardProps) {
 
-    const vSize : number = gameBoard.vSize;
-    const hSize : number = gameBoard.hSize;
+    const currentVector : Vector = props.currentVector;
 
-    const snakeProp : ISnake = gameBoard.snake;
-    const foodProp : IFood = gameBoard.food;
-    const emptySpaceProp : IEmpty = gameBoard.emptySpaces;
-    const obstacleProp : IObstacles = gameBoard.obstacles;
+    const vSize : number = props.vSize;
+    const hSize : number = props.hSize;
+
+    const snakeProp : ISnake = props.snake;
+    const foodProp : IFood = props.food;
+    const emptySpaceProp : IEmpty = props.emptySpaces;
+    const obstacleProp : IObstacles = props.obstacles;
 
     const emptySpaceCoords : Coordinates = emptySpaceProp.coordinates;
     const snakeCoords : Coordinates = snakeProp.coordinates;
@@ -102,6 +104,7 @@ function Board({...gameBoard} : ISnakeBoardProps) {
                 </Row>
 
                 <Row> Debug Info: </Row>
+                <Row> CurrentDir: {currentVector}</Row>
                 <Row> vSize: {vSize} </Row>
                 <Row> hSize: {hSize} </Row>
                 <Row> Snake Coords: {snakeCoords.map((coord : Coord) => {
