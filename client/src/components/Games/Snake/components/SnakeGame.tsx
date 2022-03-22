@@ -51,6 +51,20 @@ function SnakeGame() {
 
     function moveSnake(snake : ISnake, newDirection : Direction)
     {
+        /**
+         * Todos:
+         * Death Triggers: 
+         *  Head on bound
+         *  Head on self
+         *  Head on rock
+         * Death Event:
+         *  Restart Page
+         * Eat Trigger:
+         *  Head on food
+         * Eat Event:
+         *  Update Score
+         *  Update Snake length
+         */
         // update head and tail only
         let newHead : Coord = [
             snake.coordinates[snake.snakeLen - 1][0] + vectorStringMap[newDirection][0],
