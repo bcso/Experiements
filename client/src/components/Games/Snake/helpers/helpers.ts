@@ -71,7 +71,6 @@ export function getCoordsFromDrawnBoard()
 
 export function isValidNewDirection(dOld : Direction, dNew : Direction)
 {
-    console.log("old: " + dOld + " new: " + dNew);
     if (dOld === Direction.Down && dNew === Direction.Up ||
         dOld === Direction.Up && dNew === Direction.Down ||
         dOld === Direction.Right && dNew === Direction.Left || 

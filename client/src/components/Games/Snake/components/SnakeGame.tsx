@@ -51,8 +51,6 @@ function SnakeGame() {
 
     function moveSnake(snake : ISnake, newDirection : Direction)
     {
-        console.log("Snake moving in : " + newDirection);
-
         // update head and tail only
         let newHead : Coord = [
             snake.coordinates[snake.snakeLen - 1][0] + vectorStringMap[newDirection][0],
