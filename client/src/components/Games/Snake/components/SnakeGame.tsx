@@ -62,6 +62,12 @@ function SnakeGame() {
 
     function updateCurrDirection(newDirection: Direction)
     {
+        // update the game start state on first render
+        if (!gameBoardState.didGameStart)
+        {
+            gameBoardState.didGameStart = true;
+        }
+
         // If our game started, make sure any new direction is valid before moving our snake
         // Snake should never move backwards
         if (gameBoardState.didGameStart && 
@@ -81,11 +87,6 @@ function SnakeGame() {
     function handleKeyDown(e : KeyboardEvent)
     {
         e.preventDefault();
-        // update the game start state on first render
-        if (!gameBoardState.didGameStart)
-        {
-            gameBoardState.didGameStart = true;
-        }
         if (e.key === "ArrowUp")
         {
             updateCurrDirection(Direction.Up);
