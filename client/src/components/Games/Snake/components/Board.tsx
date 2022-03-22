@@ -1,13 +1,14 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
 import styles from "../css/Board.module.css";
-import { Vector, Coord, Coordinates, IEmpty, ISnake, IFood, ISnakeBoardProps, IObstacles } from "../types";
+import { Vector, Coord, Coordinates, IEmpty, ISnake, IFood, ISnakeBoardProps, IObstacles, Direction } from "../types";
 import Cell from "./Cell";
-import {coordsContainsTarget} from "../helpers/helpers";
+import {coordsContainsTarget, vectorStringMap} from "../helpers/helpers";
 
 function Board({...props} : ISnakeBoardProps) {
 
-    const currentVector : Vector = props.currentVector;
+    const currentDirection : Direction = props.currentDirection;
+    const currentVector : Vector = vectorStringMap[currentDirection];
 
     const vSize : number = props.vSize;
     const hSize : number = props.hSize;
@@ -60,10 +61,7 @@ function Board({...props} : ISnakeBoardProps) {
             return (<Row>
                 {row.map((_, xIdx) => {
                         const currCoord : Coord = [yIdx, xIdx];
-                        if (coordsContainsTarget(emptySpaceCoords, currCoord))
-                        {
-                            return <Cell/>
-                        } else if (coordsContainsTarget(snakeCoords, currCoord))
+                        if (coordsContainsTarget(snakeCoords, currCoord))
                         {
                             return <Cell color="blue"/>
                         } else if (coordsContainsTarget(foodCoords, currCoord))
@@ -72,6 +70,9 @@ function Board({...props} : ISnakeBoardProps) {
                         } else if (coordsContainsTarget(obstacleCoords, currCoord))
                         {
                             return <Cell color="brown"/>
+                        } else 
+                        {
+                            return <Cell/>
                         }
                     }
                 )}
@@ -94,6 +95,7 @@ function Board({...props} : ISnakeBoardProps) {
 
                 <Row> Debug Info: </Row>
                 <Row> CurrentDir: {currentVector}</Row>
+                <Row> CurrentDirection: {currentDirection}</Row>
                 <Row> vSize: {vSize} </Row>
                 <Row> hSize: {hSize} </Row>
                 <Row> Snake Coords: {snakeCoords.map((coord : Coord) => {

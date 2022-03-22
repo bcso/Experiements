@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PageBaseLayout from '../../../common/PageBaseLayout';
 import PageInProgress from '../../../common/PageInProgress';
-import { initSnakeGameBoardState, vectorStringMap } from '../helpers/helpers';
-import { Vector } from '../types';
+import { initSnakeGameBoardState, vectorStringMap, isValidNewDirection } from '../helpers/helpers';
+import { Coord, Direction, ISnake, ISnakeBoardProps, Vector } from '../types';
 import Board from './Board';
 import Keypad from './Keypad';
 
@@ -23,7 +23,7 @@ function SnakeGame() {
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
         }
-    }, []); // Only mount on first render ONCE
+    }, [gameBoardState.currentDirection]); // Only mount on first render ONCE
 
     useEffect(() => {
         if (gameBoardState.didGameStart)
@@ -37,23 +37,47 @@ function SnakeGame() {
             }
         }
     }, [gameBoardState.didGameStart, 
-        gameBoardState.currentVector])
+        gameBoardState.currentDirection])
 
     function drawBoard()
     {
-        console.log("Snake moving in : " + gameBoardState.currentVector);
-    }
+        let newState : ISnakeBoardProps = {...gameBoardState};
+        let currentDirection : Direction = newState.currentDirection;
+        let snake : ISnake = newState.snake;
+        moveSnake(snake, currentDirection);
 
-    function updateCurrVector(direction: string)
-    {
-        const newState = {...gameBoardState};
-        newState.currentVector = vectorStringMap[direction];
         setBoardState(newState);
     }
 
-    function onKeypadPress(direction: string)
+    function moveSnake(snake : ISnake, newDirection : Direction)
     {
-        updateCurrVector(direction);
+        console.log("Snake moving in : " + newDirection);
+
+        // update head and tail only
+        let newHead : Coord = [
+            snake.coordinates[snake.snakeLen - 1][0] + vectorStringMap[newDirection][0],
+            snake.coordinates[snake.snakeLen - 1][1] + vectorStringMap[newDirection][1]
+        ]
+        snake.coordinates.push(newHead);
+        snake.coordinates.shift();
+    }
+
+    function updateCurrDirection(newDirection: Direction)
+    {
+        // If our game started, make sure any new direction is valid before moving our snake
+        // Snake should never move backwards
+        if (gameBoardState.didGameStart && 
+            isValidNewDirection(gameBoardState.currentDirection, newDirection))
+        {
+            const newState = {...gameBoardState};
+            newState.currentDirection = newDirection;
+            setBoardState(newState);
+        }
+    }
+
+    function onKeypadPress(direction: Direction)
+    {
+        updateCurrDirection(direction);
     }
 
     function handleKeyDown(e : KeyboardEvent)
@@ -66,16 +90,16 @@ function SnakeGame() {
         }
         if (e.key === "ArrowUp")
         {
-            updateCurrVector("Up");
+            updateCurrDirection(Direction.Up);
         } else if (e.key === "ArrowDown")
         {
-            updateCurrVector("Down");
-        } else if (e.key === "ArrowLeft")
-        {
-            updateCurrVector("Left");
+            updateCurrDirection(Direction.Down);
         } else if (e.key === "ArrowRight")
         {
-            updateCurrVector("Right");
+            updateCurrDirection(Direction.Right);
+        } else if (e.key === "ArrowLeft")
+        {
+            updateCurrDirection(Direction.Left);
         }
     }
 

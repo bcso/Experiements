@@ -1,10 +1,10 @@
-import { Coord, Coordinates, ISnakeBoardProps, Vector } from "../types";
+import { Coord, Coordinates, ISnakeBoardProps, Vector, Direction } from "../types";
 
-export const vectorStringMap : {[dirAsString : string] : Vector} = {
-    "Up" : [0,1],
-    "Down": [0,-1],
-    "Right": [1,0],
-    "Left": [-1,0]
+export const vectorStringMap : {[k in Direction] : Vector} = {
+    "Up" : [-1,0],
+    "Down": [1,0],
+    "Right": [0,1],
+    "Left": [0,-1]
 }
 
 // Quick way to generate the initial
@@ -16,6 +16,13 @@ export const vectorStringMap : {[dirAsString : string] : Vector} = {
 // the game will start with this
 export function getCoordsFromDrawnBoard()
 {
+
+    /** Board coordinates:
+     * 0 1 2 3
+     * 1
+     * 2
+     * 3
+     */
     const drawnBoard : Array<Array<string>> = [
         ["","","","","","","","","","","","","","",""],
         ["","","","","","","f","","","","","","","",""],
@@ -60,6 +67,19 @@ export function getCoordsFromDrawnBoard()
     return {
         vSize, hSize, snakeCoordinates, foodCoordinates, obstaclesCoordinates, emptyCoordinates
     }
+}
+
+export function isValidNewDirection(dOld : Direction, dNew : Direction)
+{
+    console.log("old: " + dOld + " new: " + dNew);
+    if (dOld === Direction.Down && dNew === Direction.Up ||
+        dOld === Direction.Up && dNew === Direction.Down ||
+        dOld === Direction.Right && dNew === Direction.Left || 
+        dOld === Direction.Left && dNew === Direction.Right)
+        {
+            return false;
+        }
+    return true;
 }
 
 // In case we wanted to input our sparse snake, food and obstacles directly we can use this
@@ -117,7 +137,8 @@ export function initSnakeGameBoardState() : ISnakeBoardProps {
             coordinates : snakeCoords,
             aliveState : true,
             head : snakeCoords[snakeCoords.length - 1],
-            tail : snakeCoords[0]
+            tail : snakeCoords[0],
+            snakeLen : snakeCoords.length
         },
         food : {
             coordinates : foodCoords,
@@ -130,6 +151,6 @@ export function initSnakeGameBoardState() : ISnakeBoardProps {
             coordinates : emptyCoords
         },
         didGameStart : false,
-        currentVector : [1, 0] // right is the first vector
+        currentDirection : Direction.Down
     }
 }

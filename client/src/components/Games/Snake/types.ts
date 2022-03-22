@@ -5,14 +5,22 @@
 // [0,-1] -> "left"
 // [1,0] -> "up"
 export type Vector = [number, number];
-
+export type DirectionString = string;
 // Vector type is a cartesian coordinate : [y,x]
 export type Coord = [number, number];
 export type Coordinates = Array<Coord>;
 
+export enum Direction
+{
+    Up = "Up",
+    Down = "Down",
+    Right = "Right",
+    Left = "Left"
+}
+
 export interface IKeypadProps 
 {
-    onKeypadPress: (v : string) => void;
+    onKeypadPress: (d : Direction) => void;
 }
 
 export interface IGameState
@@ -29,7 +37,7 @@ export interface ISnakeBoardProps {
     obstacles?: IObstacles,
     emptySpaces: IEmpty,
     didGameStart: boolean,
-    currentVector: Vector
+    currentDirection : Direction;
 }
 
 export interface ICell {
@@ -48,6 +56,7 @@ export interface ISnake extends ICell {
     aliveState: boolean;
     head: Coord;
     tail: Coord;
+    snakeLen: number;
 }
 
 export interface IEmpty extends ICell {
