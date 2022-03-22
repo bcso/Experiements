@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PageBaseLayout from '../../../common/PageBaseLayout';
 import PageInProgress from '../../../common/PageInProgress';
 import { initSnakeGameBoardState, vectorStringMap } from '../helpers/helpers';
@@ -25,6 +25,25 @@ function SnakeGame() {
         }
     }, []); // Only mount on first render ONCE
 
+    useEffect(() => {
+        if (gameBoardState.didGameStart)
+        {
+            // todo : make delay consistent after key stroke
+            let interval = setInterval(drawBoard, 1000);
+
+            // clear our interval when a new change happens
+            return () => {
+                clearInterval(interval);
+            }
+        }
+    }, [gameBoardState.didGameStart, 
+        gameBoardState.currentVector])
+
+    function drawBoard()
+    {
+        console.log("Snake moving in : " + gameBoardState.currentVector);
+    }
+
     function updateCurrVector(direction: string)
     {
         const newState = {...gameBoardState};
@@ -40,6 +59,11 @@ function SnakeGame() {
     function handleKeyDown(e : KeyboardEvent)
     {
         e.preventDefault();
+        // update the game start state on first render
+        if (!gameBoardState.didGameStart)
+        {
+            gameBoardState.didGameStart = true;
+        }
         if (e.key === "ArrowUp")
         {
             updateCurrVector("Up");

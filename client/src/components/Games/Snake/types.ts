@@ -28,6 +28,7 @@ export interface ISnakeBoardProps {
     food: IFood,
     obstacles?: IObstacles,
     emptySpaces: IEmpty,
+    didGameStart: boolean,
     currentVector: Vector
 }
 
