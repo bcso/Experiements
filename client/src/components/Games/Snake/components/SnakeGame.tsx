@@ -15,7 +15,7 @@ function SnakeGame() {
     // event listener handleKeyDown to keydown, and on the component unmount
     // clean it up by returning
     // source : https://www.pluralsight.com/guides/event-listeners-in-react-components
-    React.useEffect(() => {
+    useEffect(() => {
         // do this on first render
         window.addEventListener("keydown", handleKeyDown);
 
@@ -23,7 +23,8 @@ function SnakeGame() {
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
         }
-    }, [gameBoardState.currentDirection]); // Only mount on first render ONCE
+    }, [gameBoardState.currentDirection]); 
+    // On mount, update the handleKeyDown event handler as it contains gameBoardState.currentDirection dependency
 
     useEffect(() => {
         if (gameBoardState.didGameStart)

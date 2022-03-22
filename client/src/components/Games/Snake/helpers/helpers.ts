@@ -29,8 +29,8 @@ export function getCoordsFromDrawnBoard()
         ["","","","","","","","","","","","","","",""],
         ["","","","","","","","","","","","","","",""],
         ["","","","","","","","","","","","","","",""],
-        ["","","","s","s","s","s","s","","","","","","",""],
         ["","","","","","","","","","","","","","",""],
+        ["","","","s","s","s","s","s","","","","","","",""],
         ["","","","","","","","","","","","","","",""],
         ["","","","o","","","","","","","","","","",""],
         ["","","","","","","","","","","","","","",""],
@@ -69,6 +69,13 @@ export function getCoordsFromDrawnBoard()
     }
 }
 
+/**
+ * 
+ * @param dOld Old Direction
+ * @param dNew New Direction
+ * @returns boolean : whether or not the new direction is valid, given the old and current direction
+ * We should never let the snake move backwards into itself
+ */
 export function isValidNewDirection(dOld : Direction, dNew : Direction)
 {
     if (dOld === Direction.Down && dNew === Direction.Up ||
