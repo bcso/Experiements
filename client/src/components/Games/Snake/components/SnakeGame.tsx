@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PageBaseLayout from '../../../common/PageBaseLayout';
 import PageInProgress from '../../../common/PageInProgress';
-import { initSnakeGameBoardState, vectorStringMap, isValidNewDirection } from '../helpers/helpers';
-import { Coord, Direction, ISnake, ISnakeBoardProps, Vector } from '../types';
+import { initSnakeGameBoardState, vectorStringMap, isValidNewDirection, coordsContainsTarget } from '../helpers/helpers';
+import { Coord, Coordinates, Direction, IFood, IObstacles, ISnake, ISnakeBoardProps, Vector } from '../types';
 import Board from './Board';
 import Keypad from './Keypad';
 
@@ -12,45 +12,62 @@ function SnakeGame() {
 
     // We need to be able to detect user UDLR keypad input
     // Do this only once : on SnakeGame component's first render, add the
-    // event listener handleKeyDown to keydown, and on the component unmount
+    // event listener handleKeyboardDirInput to keydown, and on the component unmount
     // clean it up by returning
     // source : https://www.pluralsight.com/guides/event-listeners-in-react-components
     useEffect(() => {
-        // do this on first render
-        window.addEventListener("keydown", handleKeyDown);
+        // if game has not been lost or won yet, we are in the middle of an active session, 
+        // so continue handling keybaord direciton input
+        if (gameBoardState.gameWin === undefined)
+        {
+            // do this on first render
+            window.addEventListener("keydown", handleKeyboardDirInput);
 
-        // do this when component unmounts
-        return () => {
-            window.removeEventListener("keydown", handleKeyDown);
+            // do this when component unmounts
+            return () => {
+                window.removeEventListener("keydown", handleKeyboardDirInput);
+            }
+        } else if (gameBoardState.gameWin === false)
+        {
+            console.log("You lost! Score: " + gameBoardState.snake.snakeLen);
+        } else if (gameBoardState.gameWin === true)
+        {
+            console.log("You Won! Score: " + gameBoardState.snake.snakeLen);
         }
-    }, [gameBoardState.currentDirection]); 
-    // On mount, update the handleKeyDown event handler as it contains gameBoardState.currentDirection dependency
+    }, [gameBoardState.gameWin,
+        gameBoardState.currentDirection]); 
+    // On mount, update the handleKeyboardDirInput event handler as it contains gameBoardState.currentDirection dependency
 
     useEffect(() => {
-        if (gameBoardState.didGameStart)
+        let interval : NodeJS.Timer = undefined;
+
+        // only continue drawing the board when the game is started
+        if (gameBoardState.isGameOngoing)
         {
             // todo : make delay consistent after key stroke
-            let interval = setInterval(drawBoard, 1000);
+            interval = setInterval(drawBoard, 1000);
+        }
 
+        // regardless of if game is started or stopped, clear our interval
+        if (interval != undefined)
+        {
             // clear our interval when a new change happens
             return () => {
                 clearInterval(interval);
             }
         }
-    }, [gameBoardState.didGameStart, 
+    }, [gameBoardState.isGameOngoing, 
         gameBoardState.currentDirection])
 
     function drawBoard()
     {
         let newState : ISnakeBoardProps = {...gameBoardState};
-        let currentDirection : Direction = newState.currentDirection;
-        let snake : ISnake = newState.snake;
-        moveSnake(snake, currentDirection);
+        moveSnake(newState);
 
         setBoardState(newState);
     }
 
-    function moveSnake(snake : ISnake, newDirection : Direction)
+    function moveSnake(newState : ISnakeBoardProps)
     {
         /**
          * Todos:
@@ -67,25 +84,57 @@ function SnakeGame() {
          *  Update Snake length
          */
         // update head and tail only
+        let currentDirection : Direction = newState.currentDirection;
+        let snake : ISnake = newState.snake;
+        let obstacles : IObstacles = newState.obstacles;
+        let food : IFood = newState.food;
+
         let newHead : Coord = [
-            snake.coordinates[snake.snakeLen - 1][0] + vectorStringMap[newDirection][0],
-            snake.coordinates[snake.snakeLen - 1][1] + vectorStringMap[newDirection][1]
+            snake.coordinates[snake.snakeLen - 1][0] + vectorStringMap[currentDirection][0],
+            snake.coordinates[snake.snakeLen - 1][1] + vectorStringMap[currentDirection][1]
         ]
-        snake.coordinates.push(newHead);
-        snake.coordinates.shift();
+
+        if (isDead(newHead, snake.coordinates, obstacles.coordinates, newState.hSize, newState.vSize))
+        {
+            // stop the game
+            newState.isGameOngoing = false;
+            // update the game state
+            newState.gameWin = false;
+        } else 
+        {
+            snake.coordinates.push(newHead);
+            snake.coordinates.shift();
+        }
+    }
+
+    function isDead(
+        newCoord : Coord, 
+        snakeCoords : Coordinates, 
+        obsCoords : Coordinates, 
+        boardHeight : number, 
+        boardWidth : number) : boolean
+    {
+        if (coordsContainsTarget(snakeCoords, newCoord) ||
+            coordsContainsTarget(obsCoords, newCoord) ||
+            newCoord[0] < 0 || newCoord[0] >= boardWidth ||
+            newCoord[1] < 0 || newCoord[1] >= boardHeight)
+            {
+                return true;
+            }
+        return false;
     }
 
     function updateCurrDirection(newDirection: Direction)
     {
         // update the game start state on first render
-        if (!gameBoardState.didGameStart)
+        if (!gameBoardState.isGameOngoing)
         {
-            gameBoardState.didGameStart = true;
+            gameBoardState.isGameOngoing = true;
         }
 
         // If our game started, make sure any new direction is valid before moving our snake
         // Snake should never move backwards
-        if (gameBoardState.didGameStart && 
+        if (gameBoardState.isGameOngoing && 
             isValidNewDirection(gameBoardState.currentDirection, newDirection))
         {
             const newState = {...gameBoardState};
@@ -99,7 +148,7 @@ function SnakeGame() {
         updateCurrDirection(direction);
     }
 
-    function handleKeyDown(e : KeyboardEvent)
+    function handleKeyboardDirInput(e : KeyboardEvent)
     {
         e.preventDefault();
         if (e.key === "ArrowUp")

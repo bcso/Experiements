@@ -138,7 +138,7 @@ export function initSnakeGameBoardState() : ISnakeBoardProps {
     return {
         vSize : vSize,
         hSize : hSize,
-        gameWin: false,
+        gameWin: undefined,
         snake: {
             coordinates : snakeCoords,
             aliveState : true,
@@ -156,7 +156,7 @@ export function initSnakeGameBoardState() : ISnakeBoardProps {
         emptySpaces : {
             coordinates : emptyCoords
         },
-        didGameStart : false,
-        currentDirection : Direction.Down
+        isGameOngoing : false,
+        currentDirection : undefined
     }
 }
