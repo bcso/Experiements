@@ -29,10 +29,10 @@ function SnakeGame() {
             }
         } else if (gameBoardState.gameWin === false)
         {
-            console.log("You lost! Score: " + gameBoardState.snake.snakeLen);
+            console.log("You lost! Score: " + gameBoardState.snake.coordinates.length);
         } else if (gameBoardState.gameWin === true)
         {
-            console.log("You Won! Score: " + gameBoardState.snake.snakeLen);
+            console.log("You Won! Score: " + gameBoardState.snake.coordinates.length);
         }
     }, [gameBoardState.gameWin,
         gameBoardState.currentDirection]); 
@@ -64,6 +64,7 @@ function SnakeGame() {
         let newState : ISnakeBoardProps = {...gameBoardState};
         moveSnake(newState);
 
+        console.log(newState.snake.coordinates);
         setBoardState(newState);
     }
 
@@ -89,12 +90,12 @@ function SnakeGame() {
         let obstacles : IObstacles = newState.obstacles;
         let food : IFood = newState.food;
 
-        let newHead : Coord = [
-            snake.coordinates[snake.snakeLen - 1][0] + vectorStringMap[currentDirection][0],
-            snake.coordinates[snake.snakeLen - 1][1] + vectorStringMap[currentDirection][1]
+        let candidateNewHead : Coord = [
+            snake.coordinates[snake.coordinates.length - 1][0] + vectorStringMap[currentDirection][0],
+            snake.coordinates[snake.coordinates.length - 1][1] + vectorStringMap[currentDirection][1]
         ]
-
-        if (isDead(newHead, snake.coordinates, obstacles.coordinates, newState.hSize, newState.vSize))
+        
+        if (isDead(candidateNewHead, snake.coordinates, obstacles.coordinates, newState.hSize, newState.vSize))
         {
             // stop the game
             newState.isGameOngoing = false;
@@ -102,9 +103,24 @@ function SnakeGame() {
             newState.gameWin = false;
         } else 
         {
-            snake.coordinates.push(newHead);
-            snake.coordinates.shift();
+            if (didSnakeEat(candidateNewHead, food.coordinates))
+            {
+                snake.coordinates.push(candidateNewHead);
+            } else 
+            {
+                snake.coordinates.push(candidateNewHead);
+                snake.coordinates.shift();
+            }
         }
+    }
+
+    function didSnakeEat(candidateHeadCoord : Coord, foodCoords : Coordinates)
+    {
+        if (coordsContainsTarget(foodCoords, candidateHeadCoord))
+        {
+            return true;
+        }
+        return false;
     }
 
     function isDead(

@@ -143,8 +143,7 @@ export function initSnakeGameBoardState() : ISnakeBoardProps {
             coordinates : snakeCoords,
             aliveState : true,
             head : snakeCoords[snakeCoords.length - 1],
-            tail : snakeCoords[0],
-            snakeLen : snakeCoords.length
+            tail : snakeCoords[0]
         },
         food : {
             coordinates : foodCoords,
