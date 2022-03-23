@@ -63,8 +63,6 @@ function SnakeGame() {
     {
         let newState : ISnakeBoardProps = {...gameBoardState};
         moveSnake(newState);
-
-        console.log(newState.snake.coordinates);
         setBoardState(newState);
     }
 

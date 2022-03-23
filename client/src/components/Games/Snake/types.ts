@@ -56,7 +56,6 @@ export interface ISnake extends ICell {
     aliveState: boolean;
     head: Coord;
     tail: Coord;
-    snakeLen: number;
 }
 
 export interface IEmpty extends ICell {
