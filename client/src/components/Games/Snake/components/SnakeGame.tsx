@@ -44,8 +44,10 @@ function SnakeGame() {
         // only continue drawing the board when the game is started
         if (gameBoardState.isGameOngoing)
         {
-            // todo : make delay consistent after key stroke
-            interval = setInterval(drawBoard, 1000);
+            // todo : make delay consistent after key stroke    
+            // todo : BUG time slows down after a few direciont changes
+            //      https://javascript.info/settimeout-setinterval        
+            interval = setInterval(drawBoard, 200);
         }
 
         // regardless of if game is started or stopped, clear our interval
