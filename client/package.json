@@ -8,6 +8,7 @@
     "startDev": "webpack-dev-server",
     "build": "npx webpack",
     "start": "node server.js",
+    "sd": "npm run startDev",
     "buildAndPublish": "npm run build && firebase deploy"
   },
   "repository": {
