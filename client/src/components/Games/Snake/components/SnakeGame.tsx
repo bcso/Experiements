@@ -47,7 +47,7 @@ function SnakeGame() {
             // todo : make delay consistent after key stroke    
             // todo : BUG time slows down after a few direciont changes
             //      https://javascript.info/settimeout-setinterval        
-            interval = setInterval(drawBoard, 200);
+            interval = setInterval(drawBoard, 500);
         }
 
         // regardless of if game is started or stopped, clear our interval
@@ -106,6 +106,7 @@ function SnakeGame() {
             if (didSnakeEat(candidateNewHead, food.coordinates))
             {
                 snake.coordinates.push(candidateNewHead);
+                // TODO: re-place the food item
             } else 
             {
                 snake.coordinates.push(candidateNewHead);
